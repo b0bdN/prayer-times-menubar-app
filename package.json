@@ -1,0 +1,22 @@
+{
+  "name": "prayer-times-app",
+  "version": "0.1.0",
+  "description": "A simple display of prayer times",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "b0bdN",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^16.0.5",
+    "standard": "^16.0.4"
+  },
+  "dependencies": {
+    "electron-store": "^8.0.1",
+    "menubar": "^9.1.1",
+    "node-fetch": "^2.6.7",
+    "uninstall": "^0.0.0"
+  }
+}

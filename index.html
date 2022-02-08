@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap');
+  </style>
+
+  <link rel="stylesheet" href="style.css">
+  <title>Prayer Times</title>
+</head>
+<body>
+  <div class="wrapper">
+
+    <div id="main">
+      <div class="header">
+        <div class="settings">
+          <div id="nav-icon">
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <div id="clock" class="fs-medium"></div>
+      </div>
+
+      <div class="content">
+        <div class="next-prayer"></div>
+        <div class="t-note fs-large"></div>
+      </div>
+    </div>
+
+    <div id="details" class="fs-large">
+      <div class="header">
+        <div class="dates">
+          <div id="date-g" style="font-weight: bold;"></div>
+          <div id="date-h" style="color:#404040;"></div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="t-table" id="timings-table"></div>
+      </div>
+    </div>
+
+    <div id="settings">
+      <div class="content hidden">
+        <div class="fs-large">prayer times</div>
+        <div class="grid">
+          <div class="form-item">
+            <label for="city">City</label>
+            <input type="text" name="city" value="" id="city" autofocus>
+            <div class="geolocation"></div>
+            <div class="help fs-medium">
+              e.g.: Dubai, AE / Montreal, CA / Paris, FR
+              <br><a href="https://www.iso.org/obp/ui/#search/code/" target="_blank" alt="ISO Contry Codes">Country codes</a>
+            </div>
+          </div>
+          <div class="form-item">
+            <label for="calculation">Calculation method</label>
+            <select name="calculation" id="calculation">
+              <option value="auto">Auto detect</option>
+              <option value="99">Custom</option>
+              <option value="1">Muslim World League</option>
+              <option value="2">Islamic Society of North America</option>
+              <option value="3">Egyptian General Authority of Survey</option>
+              <option value="4">Umm Al-Qura University, Makkah</option>
+              <option value="5">University of Islamic Sciences, Karachi</option>
+              <option value="6">Institute of Geophysics, University of Tehran</option>
+              <option value="7">Shia Ithna-Ashari, Leva Institute, Qum</option>
+              <option value="8">Gulf Region</option>
+              <option value="9">Kuwait</option>
+              <option value="10">Qatar</option>
+              <option value="11">Majlis Ugama Islam Singapura, Singapore</option>
+              <option value="12">Union Organization islamic de France</option>
+              <option value="13">Diyanet İşleri Başkanlığı, Turkey</option>
+              <option value="14">Spiritual Administration of Muslims of Russia</option>
+            </select>
+          </div>
+          <div class="form-item">
+            <label>Show additional times</label>
+            <div class="add-flex">
+              <input type="checkbox" name="Imsak" id="checkImsak">
+              <label for="Imsak">Imsak</label>
+              <input type="checkbox" name="Sunrise" id="checkSunrise">
+              <label for="Sunrise">Sunrise</label>
+              <input type="checkbox" name="Midnight" id="checkMidnight">
+              <label for="Midnight">Midnight</label>
+            </div>
+          </div>
+          <div class="form-item angle" id="custom-angle">
+            <label for="fajr-angle">Fajr angle (°)</label>
+            <input type="number" name="fajr-angle" id="fajr-angle" value="18.0" step="0.1">
+            <label for="isha-angle">Isha angle (°)</label>
+            <input type="number" name="isha-angle" id="isha-angle" value="18.0" step="0.1">
+          </div>
+          <div class="form-item grid-item">
+            <label>Manual times adjustments</label>
+            <div class="number-input">
+              <label for="tune-imsak">Imsak</label>
+              <input type="number" id="tuneImsak" name="tune-imsak" step="1" value="0">
+            </div>
+            <div class="number-input">
+              <label for="tune-fajr">Fajr</label>
+              <input type="number" id="tuneFajr" name="tune-fajr" step="1" value="0">
+            </div>
+            <div class="number-input">
+              <label for="tune-fajr">Sunrise</label>
+              <input type="number" id="tuneSunrise" name="tune-sunrise" step="1" value="0">
+            </div>
+            <div class="number-input">
+              <label for="tune-fajr">Dhuhr</label>
+              <input type="number" id="tuneDhuhr" name="tune-dhuhr" step="1" value="0">
+            </div>
+            <div class="number-input">
+              <label for="tune-fajr">Asr</label>
+              <input type="number" id="tuneAsr" name="tune-asr" step="1" value="0">
+            </div>
+            <div class="number-input">
+              <label for="tune-fajr">Maghrib</label>
+              <input type="number" id="tuneMaghrib" name="tune-maghrib" step="1" value="0">
+            </div>
+            <div class="number-input">
+              <label for="tune-fajr">Isha</label>
+              <input type="number" id="tuneIsha" name="tune-isha" step="1" value="0">
+            </div>
+            <div class="number-input">
+              <label for="tune-fajr">Midnight</label>
+              <input type="number" id="tuneMidnight" name="tune-midnight" step="1" value="0">
+            </div>
+          </div>
+        </div>
+        <div>
+          <button id="apply-btn" style="float:left">Apply</button>
+          <button id="close-btn" style="float:right">Quit</button>
+        </div>
+      </div>
+      <!-- <div class="footer fs-medium">
+        <a href="#">prayer times version <span id="version"></span></a>
+      </div> -->
+    </div>
+
+  </div>
+
+  <script src="./renderer.js"></script>
+</body>
+</html>
