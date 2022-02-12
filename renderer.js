@@ -228,10 +228,14 @@ document.getElementById('apply-btn').addEventListener('click', () => {
 /*
   data[0]: hijri date
   data[1]: timings table
+  data[2 - 4]: check Imsak, Sunrise, Midnight
 */
 window.api.receive('update-data', (data) => {
   document.getElementById('date-h').innerHTML = data[0]
   document.getElementById('timings-table').innerHTML = data[1]
+  document.getElementById('checkImsak').checked = data[2]
+  document.getElementById('checkSunrise').checked = data[3]
+  document.getElementById('checkMidnight').checked = data[4]
   toogleSettings()
   window.api.send('settings')
 })

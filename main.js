@@ -211,15 +211,25 @@ mb.on('ready', async () => {
       store.setCustomAngle(fajrAngle, ishaAngle)
     }
 
+    let check = false
     // Checkboxes show/hide imsak, sunrise, midnight.
     const checkImsak = args[4]
-    store.setCheckImsak(checkImsak)
+    if (checkImsak !== store.getCheckImsak) {
+      check = true
+      store.setCheckImsak(checkImsak)
+    }
 
     const checkSunrise = args[5]
-    store.setCheckSunrise(checkSunrise)
+    if (checkSunrise !== store.getCheckSunrise) {
+      check = true
+      store.setCheckSunrise(checkSunrise)
+    }
 
     const checkMidnight = args[6]
-    store.setCheckMidnight(checkMidnight)
+    if (checkMidnight !== store.getCheckMidnight) {
+      check = true
+      store.setCheckMidnight(checkMidnight)
+    }
 
     // Custom times adjustments (tunes)
     const tunes = {
@@ -254,12 +264,17 @@ mb.on('ready', async () => {
     }
 
     // Download the new timings.
-    if (changed) {
+    if (changed || check) {
       console.log('Storage: some parameters are different.')
-      await getTimings(city, country, calcMethod, tunes, midnightMode)
+      if (changed) {
+        await getTimings(city, country, calcMethod, tunes, midnightMode)
+      }
       mb.window.webContents.send('update-data', [
         store.getHijriDate(),
-        store.getTableTimings()
+        store.getTableTimings(),
+        store.getCheckImsak(),
+        store.getCheckSunrise(),
+        store.getCheckMidnight()
       ])
     }
   })
