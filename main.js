@@ -60,7 +60,8 @@ mb.on('ready', () => {
       const country = store.getCountry
       const method = store.getCalcMethod ? store.getCalcMethod : ''
       const tunes = store.getTunes ? store.getTunes : false
-      getTimings(city, country, method, tunes)
+      const midnightMode = store.getMidnightMode ? store.getMidnightMode : '0'
+      getTimings(city, country, method, tunes, midnightMode)
     }
   }
 
@@ -73,6 +74,7 @@ mb.on('ready', () => {
     const checkSunrise = store.getCheckSunrise ? store.getCheckSunrise : false
     const checkMidnight = store.getCheckMidnight ? store.getCheckMidnight : false
     const tuneValues = store.getTunes ? store.getTunes : false
+    const midnightMode = store.getMidnightMode ? store.getMidnightMode : '0' // 0 by default for Standard
     const tableTimings = store.getTableTimings()
 
     mb.window.webContents.send('init-data', [
@@ -83,7 +85,8 @@ mb.on('ready', () => {
       checkImsak,
       checkSunrise,
       checkMidnight,
-      tuneValues
+      tuneValues,
+      midnightMode
     ])
   }
   init()
@@ -122,10 +125,10 @@ mb.on('ready', () => {
     }
   }
 
-  // TODO: add more parameters after adding them in the settings pannel (e.g. tune, school, midnightMode ...).
-  function getTimings (city, country, method, tunes) {
+  // TODO: add more parameters after adding them in the settings pannel (e.g. school, hijri adjustment, latitudeAdjustmentMethod  ...).
+  function getTimings (city, country, method, tunes, midnightMode) {
     console.log('Fecth timings with Aladhan API.')
-    let url = `https://api.aladhan.com/v1/calendarByCity?annual=true&city=${city}&country=${country}`
+    let url = `https://api.aladhan.com/v1/calendarByCity?annual=true&city=${city}&country=${country}&midnightMode=${midnightMode}`
 
     if (method !== 'auto') url += `&method=${method}`
 
@@ -184,6 +187,7 @@ mb.on('ready', () => {
     args[2 - 3]: fajr angle, isha angle
     args[4 - 6]: checkImsak, checkSunrise, checkMidnight (true/false)
     args[7 - 14]: tune Fajr, Sunrise, Dhuhr, Asr, Maghrib, Isha, Midnight
+    args[15]: midnightMode
     */
 
     // <input> city, country.
@@ -248,10 +252,18 @@ mb.on('ready', () => {
       store.setTunes(tunesArray)
     }
 
+    // MidnightMode
+    const midnightMode = args[15]
+    if (midnightMode !== store.getMidnightMode) {
+      changed = true
+      console.log('Storage: the parameter midnightMode is different.')
+      store.setMidnightMode(midnightMode)
+    }
+
     // Download the new timings.
     if (changed) {
       console.log('Storage: some parameters are different.')
-      getTimings(city, country, calcMethod, tunes)
+      getTimings(city, country, calcMethod, tunes, midnightMode)
     }
 
     setTimeout(() => mb.window.webContents.send('update-data', [

@@ -6,6 +6,7 @@
  args[3]: calculation method
  args[4 - 6]: checkbox imsak, sunrise, midnight
  args[7]: tunes
+ args[8]: midnightMode
 */
 window.api.receive('init-data', (args) => {
   document.getElementById('city').value = args[0]
@@ -25,6 +26,13 @@ window.api.receive('init-data', (args) => {
     document.getElementById('tuneMaghrib').value = args[7].maghrib
     document.getElementById('tuneIsha').value = args[7].isha
     document.getElementById('tuneMidnight').value = args[7].midnight
+  }
+  if (args[8] === '0') {
+    document.getElementById('midnightStd').checked = true
+    document.getElementById('midnightJafari').checked = false
+  } else {
+    document.getElementById('midnightStd').checked = false
+    document.getElementById('midnightJafari').checked = true
   }
 })
 
@@ -194,6 +202,7 @@ document.getElementById('apply-btn').addEventListener('click', () => {
   const tuneMaghrib = document.getElementById('tuneMaghrib').value
   const tuneIsha = document.getElementById('tuneIsha').value
   const tuneMidnight = document.getElementById('tuneMidnight').value
+  const midnightMode = document.querySelector('input[name="midnightMode"]:checked').value
 
   window.api.send('apply-settings', [
     cityCountry,
@@ -210,7 +219,8 @@ document.getElementById('apply-btn').addEventListener('click', () => {
     tuneAsr,
     tuneMaghrib,
     tuneIsha,
-    tuneMidnight
+    tuneMidnight,
+    midnightMode
   ])
 })
 

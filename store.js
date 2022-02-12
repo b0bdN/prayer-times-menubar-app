@@ -53,6 +53,9 @@ const setTunes = (array) => {
 
 const getTunes = store.get('tunes')
 
+const setMidnightMode = (value) => { store.set({ midnightMode: value }) }
+const getMidnightMode = store.get('midnightMode')
+
 const setAladhan = (json) => store.set(json)
 
 const getCode = store.get('code')
@@ -125,6 +128,8 @@ exports.getCheckSunrise = getCheckSunrise
 exports.getCheckMidnight = getCheckMidnight
 exports.setTunes = setTunes
 exports.getTunes = getTunes
+exports.setMidnightMode = setMidnightMode
+exports.getMidnightMode = getMidnightMode
 exports.setAladhan = setAladhan
 exports.getCode = getCode
 exports.getHijriDate = getHijriDate
