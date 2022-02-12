@@ -89,13 +89,13 @@ mb.on('ready', async () => {
       midnightMode
     ])
   }
-  await init();
-  initData();
+  await init()
+  initData()
 
   mb.showWindow()
 
   // Geolocation - IPinfo.io
-  function geolocation() {
+  function geolocation () {
     console.log('Fetch geolocation via IPinfo.io.')
     // NOTE: Enter your TOKEN from IPinfo.io
     const TOKEN = config.TOKEN
@@ -116,17 +116,9 @@ mb.on('ready', async () => {
     return result
   })
 
-  // Check the call to the API and fetch the data.
-  function checkStatus(res) {
-    if (res.ok) { // res.status >= 200 && res.status < 300.
-      return res
-    } else {
-      throw new Error(`The HTTP status of the reponse: ${res.status} (${res.statusText})`)
-    }
-  }
-
   // TODO: add more parameters after adding them in the settings pannel (e.g. school, hijri adjustment, latitudeAdjustmentMethod  ...).
-  async function getTimings(city, country, method, tunes, midnightMode) {
+  async function getTimings (city, country, method, tunes, midnightMode) {
+    console.log('Fecth timings with Aladhan API.')
     let url = `https://api.aladhan.com/v1/calendarByCity?annual=true&city=${city}&country=${country}&midnightMode=${midnightMode}`
 
     if (method !== 'auto') url += `&method=${method}`
@@ -149,14 +141,14 @@ mb.on('ready', async () => {
 
     console.log(url)
 
-    const response = await fetch(url);
+    const response = await fetch(url)
 
     if (response.ok) {
-      const json = await response.json();
+      const json = await response.json()
       store.setAladhan(json)
     } else {
-      const text = await response.text();
-      console.log(`Error fetching data, status: '${response.status}', text: '${text}'`);
+      const text = await response.text()
+      console.log(`Error fetching data, status: '${response.status}', text: '${text}'`)
     }
   }
 
