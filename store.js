@@ -9,13 +9,13 @@ const setCityCountry = (city, country) => {
   })
 }
 
-const getCityCountry = store.get('city') + ', ' + store.get('country')
-const getCity = store.get('city')
-const getCountry = store.get('country')
+const getCityCountry = () => store.get('city') + ', ' + store.get('country')
+const getCity = () => store.get('city')
+const getCountry = () => store.get('country')
 
 const setCalcMethod = (method) => store.set({ method: method })
 
-const getCalcMethod = store.get('method')
+const getCalcMethod = () => store.get('method')
 
 const setCustomAngle = (fajr, isha) => {
   store.set({
@@ -24,16 +24,16 @@ const setCustomAngle = (fajr, isha) => {
   })
 }
 
-const getCustomFajrAngle = store.get('fajrAngle')
-const getCustomIshaAngle = store.get('ishaAngle')
+const getCustomFajrAngle = () => store.get('fajrAngle')
+const getCustomIshaAngle = () => store.get('ishaAngle')
 
 const setCheckImsak = (boolean) => store.set({ checkImsak: boolean })
 const setCheckSunrise = (boolean) => store.set({ checkSunrise: boolean })
 const setCheckMidnight = (boolean) => store.set({ checkMidnight: boolean })
 
-const getCheckImsak = store.get('checkImsak')
-const getCheckSunrise = store.get('checkSunrise')
-const getCheckMidnight = store.get('checkMidnight')
+const getCheckImsak = () => store.get('checkImsak')
+const getCheckSunrise = () => store.get('checkSunrise')
+const getCheckMidnight = () => store.get('checkMidnight')
 
 const setTunes = (array) => {
   store.set({
@@ -51,14 +51,14 @@ const setTunes = (array) => {
   })
 }
 
-const getTunes = store.get('tunes')
+const getTunes = () => store.get('tunes')
 
 const setMidnightMode = (value) => { store.set({ midnightMode: value }) }
-const getMidnightMode = store.get('midnightMode')
+const getMidnightMode = () => store.get('midnightMode')
 
 const setAladhan = (json) => store.set(json)
 
-const getCode = store.get('code')
+const getCode = () => store.get('code')
 
 const today = new Date()
 // See Prayer Times API:

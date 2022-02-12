@@ -31,7 +31,7 @@ const mb = menubar({
 // To avoid flash when opening the menubar app.
 mb.app.commandLine.appendSwitch('disable-backgrounding-occluded-windows', 'true')
 
-mb.on('ready', () => {
+mb.on('ready', async () => {
   console.log('starting')
 
   // Register a globalShortcut listener to show/hide the window.
@@ -48,33 +48,33 @@ mb.on('ready', () => {
   }
 
   // Get the data onload.
-  const init = () => {
+  const init = async () => {
     // TODO: create a function to download the new timings in January 1st.
-    if (store.getCode !== 200) {
+    if (store.getCode() !== 200) {
       console.log('Storage: timings not found.')
-      if (!store.getCity) {
+      if (!store.getCity()) {
         console.log('Storage: city not found.')
         geolocation()
       }
-      const city = store.getCity
-      const country = store.getCountry
-      const method = store.getCalcMethod ? store.getCalcMethod : ''
-      const tunes = store.getTunes ? store.getTunes : false
-      const midnightMode = store.getMidnightMode ? store.getMidnightMode : '0'
-      getTimings(city, country, method, tunes, midnightMode)
+      const city = store.getCity()
+      const country = store.getCountry()
+      const method = store.getCalcMethod() ? store.getCalcMethod() : ''
+      const tunes = store.getTunes() ? store.getTunes() : false
+      const midnightMode = store.getMidnightMode() ? store.getMidnightMode() : '0'
+      await getTimings(city, country, method, tunes, midnightMode)
     }
   }
 
   const initData = () => {
     console.log('Storage: fetching data..')
-    const cc = store.getCityCountry
+    const cc = store.getCityCountry()
     const hijriDate = store.getHijriDate()
-    const calcMethod = store.getCalcMethod ? store.getCalcMethod : 'auto'
-    const checkImsak = store.getCheckImsak ? store.getCheckImsak : false
-    const checkSunrise = store.getCheckSunrise ? store.getCheckSunrise : false
-    const checkMidnight = store.getCheckMidnight ? store.getCheckMidnight : false
-    const tuneValues = store.getTunes ? store.getTunes : false
-    const midnightMode = store.getMidnightMode ? store.getMidnightMode : '0' // 0 by default for Standard
+    const calcMethod = store.getCalcMethod() ? store.getCalcMethod() : 'auto'
+    const checkImsak = store.getCheckImsak() ? store.getCheckImsak() : false
+    const checkSunrise = store.getCheckSunrise() ? store.getCheckSunrise() : false
+    const checkMidnight = store.getCheckMidnight() ? store.getCheckMidnight() : false
+    const tuneValues = store.getTunes() ? store.getTunes() : false
+    const midnightMode = store.getMidnightMode() ? store.getMidnightMode() : '0' // 0 by default for Standard
     const tableTimings = store.getTableTimings()
 
     mb.window.webContents.send('init-data', [
@@ -89,8 +89,8 @@ mb.on('ready', () => {
       midnightMode
     ])
   }
-  init()
-  setTimeout(initData, 500)
+  await init()
+  initData()
 
   mb.showWindow()
 
@@ -111,30 +111,21 @@ mb.on('ready', () => {
 
   ipcMain.handle('find-city', () => {
     geolocation()
-    const result = store.getCityCountry
+    const result = store.getCityCountry()
     console.log(result)
     return result
   })
 
-  // Check the call to the API and fetch the data.
-  function checkStatus (res) {
-    if (res.ok) { // res.status >= 200 && res.status < 300.
-      return res
-    } else {
-      throw new Error(`The HTTP status of the reponse: ${res.status} (${res.statusText})`)
-    }
-  }
-
   // TODO: add more parameters after adding them in the settings pannel (e.g. school, hijri adjustment, latitudeAdjustmentMethod  ...).
-  function getTimings (city, country, method, tunes, midnightMode) {
+  async function getTimings (city, country, method, tunes, midnightMode) {
     console.log('Fecth timings with Aladhan API.')
     let url = `https://api.aladhan.com/v1/calendarByCity?annual=true&city=${city}&country=${country}&midnightMode=${midnightMode}`
 
     if (method !== 'auto') url += `&method=${method}`
 
     if (method === '99') { // If custom method.
-      const fajrAngle = store.getCustomFajrAngle ? store.getCustomFajrAngle : 'null'
-      const ishaAngle = store.getCustomIshaAngle ? store.getCustomIshaAngle : 'null'
+      const fajrAngle = store.getCustomFajrAngle() || 'null'
+      const ishaAngle = store.getCustomIshaAngle() || 'null'
 
       url += `&methodSettings=${fajrAngle},null,${ishaAngle}`
     }
@@ -149,14 +140,16 @@ mb.on('ready', () => {
     }
 
     console.log(url)
-    fetch(url)
-      .then(checkStatus)
-      .then(res => res.json())
-      .then(json => {
-        // console.log(json.data.timings)
-        store.setAladhan(json)
-      })
-      .catch(err => console.log(err))
+
+    const response = await fetch(url)
+
+    if (response.ok) {
+      const json = await response.json()
+      store.setAladhan(json)
+    } else {
+      const text = await response.text()
+      console.log(`Error fetching data, status: '${response.status}', text: '${text}'`)
+    }
   }
 
   // Settings: change the window's size.
@@ -178,7 +171,7 @@ mb.on('ready', () => {
 
   // Apply the new settings - button.
   // TODO: check if online/offline and input an error if offline.
-  ipcMain.on('apply-settings', (event, args) => {
+  ipcMain.on('apply-settings', async (event, args) => {
     console.log('Apply button clicked.')
     let changed = false // init to know if a parameter has been changed.
     /*
@@ -195,7 +188,7 @@ mb.on('ready', () => {
     const input = args[0].replace(/\s/g, '')
     const city = input.split(',')[0]
     const country = input.split(',')[1]
-    if (city !== store.getCity) {
+    if (city !== store.getCity()) {
       changed = true
       console.log('Storage: the city is different.')
       store.setCityCountry(city, country)
@@ -203,7 +196,7 @@ mb.on('ready', () => {
 
     // <select> calculation method.
     const calcMethod = args[1]
-    if (calcMethod !== store.getCalcMethod) {
+    if (calcMethod !== store.getCalcMethod()) {
       changed = true
       console.log('Storage: the calculation method is different.')
       store.setCalcMethod(calcMethod)
@@ -212,7 +205,7 @@ mb.on('ready', () => {
     // fajr and isha angles.
     const fajrAngle = args[2]
     const ishaAngle = args[3]
-    if (fajrAngle !== store.getCustomFajrAngle || ishaAngle !== store.getCustomIshaAngle) {
+    if (fajrAngle !== store.getCustomFajrAngle() || ishaAngle !== store.getCustomIshaAngle()) {
       changed = true
       console.log('Storage: the custom angles are different.')
       store.setCustomAngle(fajrAngle, ishaAngle)
@@ -246,7 +239,7 @@ mb.on('ready', () => {
       tunesArray.push(tunes[i])
     }
 
-    if (JSON.stringify(tunes) !== JSON.stringify(store.getTunes)) {
+    if (JSON.stringify(tunes) !== JSON.stringify(store.getTunes())) {
       changed = true
       console.log('Storage: the times adjustments are different.')
       store.setTunes(tunesArray)
@@ -254,7 +247,7 @@ mb.on('ready', () => {
 
     // MidnightMode
     const midnightMode = args[15]
-    if (midnightMode !== store.getMidnightMode) {
+    if (midnightMode !== store.getMidnightMode()) {
       changed = true
       console.log('Storage: the parameter midnightMode is different.')
       store.setMidnightMode(midnightMode)
@@ -263,14 +256,12 @@ mb.on('ready', () => {
     // Download the new timings.
     if (changed) {
       console.log('Storage: some parameters are different.')
-      getTimings(city, country, calcMethod, tunes, midnightMode)
+      await getTimings(city, country, calcMethod, tunes, midnightMode)
+      mb.window.webContents.send('update-data', [
+        store.getHijriDate(),
+        store.getTableTimings()
+      ])
     }
-
-    setTimeout(() => mb.window.webContents.send('update-data', [
-      store.getHijriDate(),
-      store.getTableTimings()
-    ]),
-    1000)
   })
 
   // Notifications
