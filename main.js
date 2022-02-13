@@ -18,7 +18,8 @@ const mb = menubar({
       preload: path.join(__dirname, 'preload.js')
     }
   },
-  preloadWindow: true
+  preloadWindow: true,
+  icon: path.join(__dirname, './assets/icon.png')
 })
 
 // console.log(app.getPath('userData'))
@@ -78,6 +79,7 @@ mb.on('ready', async () => {
     const tableTimings = store.getTableTimings()
 
     mb.window.webContents.send('init-data', [
+      app.getVersion(),
       cc,
       hijriDate,
       tableTimings,

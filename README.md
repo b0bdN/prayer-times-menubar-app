@@ -1,8 +1,10 @@
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) ![GitHub](https://img.shields.io/github/license/b0bdN/prayer-times-menubar-app)
 
-# prayer-times-menubar-app
+# <img src="./assets/Logo.png" alt="logo" width="50"> prayer-times-menubar-app
 
 A menubar application for displaying the prayer times from your city.
+
+![prayer-times](./assets/screenshots/prayer-times.png)  ![prayer-times-settings](./assets/screenshots/prayer-times-settings.png)
 
 ## Features
 
@@ -10,8 +12,6 @@ A menubar application for displaying the prayer times from your city.
 - Change the calculation method or custom the angles for Fajr and Isha prayers
 - Create your own method by changing the times of the different prayers
 - Show additional times like Imsak, Sunrise and Midnight
-
-This application use the [RESTful Prayer TImes API](https://aladhan.com/prayer-times-api) from [Aladhan](https://aladhan.com/).
 
 #### Geolocation
 
@@ -66,6 +66,7 @@ Contributions are welcomed !
 - [RESTful Prayer TImes API](https://aladhan.com/prayer-times-api) from [Aladhan.com](https://aladhan.com/)
 - [IPinfo.io](https://ipinfo.io/)
 - [Remix Icon](https://github.com/Remix-Design/RemixIcon)
+- Logo: Islam by Olena Panasovska from NounProject.com
 
 ## Licence
 

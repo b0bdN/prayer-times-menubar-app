@@ -1,33 +1,35 @@
 // Init data.
 /*
- args[0]: city, Country
- args[1]: hijri date
- args[2]: timings table
- args[3]: calculation method
- args[4 - 6]: checkbox imsak, sunrise, midnight
- args[7]: tunes
- args[8]: midnightMode
+ args[0]: app version
+ args[1]: city, Country
+ args[2]: hijri date
+ args[3]: timings table
+ args[4]: calculation method
+ args[5 - 7]: checkbox imsak, sunrise, midnight
+ args[8]: tunes
+ args[9]: midnightMode
 */
 window.api.receive('init-data', (args) => {
-  document.getElementById('city').value = args[0]
-  document.getElementById('date-h').innerHTML = args[1]
-  document.getElementById('timings-table').innerHTML = args[2]
-  document.getElementById('calculation').value = args[3]
-  customMethod(args[3])
-  document.getElementById('checkImsak').checked = args[4]
-  document.getElementById('checkSunrise').checked = args[5]
-  document.getElementById('checkMidnight').checked = args[6]
-  if (args[7]) {
-    document.getElementById('tuneImsak').value = args[7].imsak
-    document.getElementById('tuneFajr').value = args[7].fajr
-    document.getElementById('tuneSunrise').value = args[7].sunrise
-    document.getElementById('tuneDhuhr').value = args[7].dhuhr
-    document.getElementById('tuneAsr').value = args[7].asr
-    document.getElementById('tuneMaghrib').value = args[7].maghrib
-    document.getElementById('tuneIsha').value = args[7].isha
-    document.getElementById('tuneMidnight').value = args[7].midnight
+  document.getElementById('version').innerHTML = args[0]
+  document.getElementById('city').value = args[1]
+  document.getElementById('date-h').innerHTML = args[2]
+  document.getElementById('timings-table').innerHTML = args[3]
+  document.getElementById('calculation').value = args[4]
+  customMethod(args[4])
+  document.getElementById('checkImsak').checked = args[5]
+  document.getElementById('checkSunrise').checked = args[6]
+  document.getElementById('checkMidnight').checked = args[7]
+  if (args[8]) {
+    document.getElementById('tuneImsak').value = args[8].imsak
+    document.getElementById('tuneFajr').value = args[8].fajr
+    document.getElementById('tuneSunrise').value = args[8].sunrise
+    document.getElementById('tuneDhuhr').value = args[8].dhuhr
+    document.getElementById('tuneAsr').value = args[8].asr
+    document.getElementById('tuneMaghrib').value = args[8].maghrib
+    document.getElementById('tuneIsha').value = args[8].isha
+    document.getElementById('tuneMidnight').value = args[8].midnight
   }
-  if (args[8] === '0') {
+  if (args[9] === '0') {
     document.getElementById('midnightStd').checked = true
     document.getElementById('midnightJafari').checked = false
   } else {
