@@ -66,9 +66,12 @@ const today = new Date()
 // - date start with 0 for 1st day of the month
 const month = today.getMonth() + 1
 const date = today.getDate() - 1
-const jsonPrm = `data.${month}.${date}`
+let jsonPrm = `data.${month}.${date}`
 
-const getHijriDate = () => {
+const getHijriDate = (newMonth, newDate) => {
+  if (newMonth && newDate) {
+    jsonPrm = `data.${newMonth}.${newDate}`
+  }
   const hDay = store.get(`${jsonPrm}.date.hijri.day`)
   const hMonth = store.get(`${jsonPrm}.date.hijri.month.en`)
   const hYear = store.get(`${jsonPrm}.date.hijri.year`)
@@ -77,7 +80,10 @@ const getHijriDate = () => {
 
 // Get prayer timings.
 // TODO: update the time format to correspond with toLocaleTimeString().
-const getTableTimings = () => {
+const getTableTimings = (newMonth, newDate) => {
+  if (newMonth && newDate) {
+    jsonPrm = `data.${newMonth}.${newDate}`
+  }
   const imsak = store.get('checkImsak') ? store.get(`${jsonPrm}.timings.Imsak`).split(' ')[0] : false
   const fajr = store.get(`${jsonPrm}.timings.Fajr`).split(' ')[0]
   const sunrise = store.get('checkSunrise') ? store.get(`${jsonPrm}.timings.Sunrise`).split(' ')[0] : false

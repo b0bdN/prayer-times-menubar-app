@@ -154,6 +154,20 @@ mb.on('ready', async () => {
     }
   }
 
+  // If midnight (00:00), get the next table of timings
+  ipcMain.on('getNewTimingsTable', () => {
+    console.log('Storage: get the new timings table.')
+    const today = new Date()
+    // See Prayer Times API, month start at 1 and date at 0.
+    const month = today.getMonth() + 1
+    const date = today.getDate() - 1
+
+    mb.window.webContents.send('setNewTimingsTable', [
+      store.getHijriDate(month, date),
+      store.getTableTimings(month, date)
+    ])
+  })
+
   // Settings: change the window's size.
   // TODO: find another method instead of hideWindow() and showWindow().
   ipcMain.on('settings', () => {

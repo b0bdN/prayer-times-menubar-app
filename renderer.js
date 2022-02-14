@@ -89,6 +89,7 @@ const getNextPrayer = () => {
         ' And Allah knows that which you do.'
 
       new Notification(NOTIFICATION_TITLE, { body: NOTIFICATION_BODY }).show()
+
       break
     } else if (pNames[i].innerHTML === 'Midnight') {
       if (timeString > t) {
@@ -100,6 +101,7 @@ const getNextPrayer = () => {
 
         diffTime(start, end)
         document.querySelector('.content .next-prayer').innerHTML = pNames[i].innerHTML
+
         break
       }
     }
@@ -117,11 +119,25 @@ const getNextPrayer = () => {
       tNote.innerHTML = diffMinutes + ' min left'
     }
   }
+
+  // If midnight (00:00), get the next table of timings
+  if (timeString === '00:00:00') {
+    window.api.send('getNewTimingsTable')
+  }
 }
 setInterval(getNextPrayer, 1000)
 
+// Update the timings table at midnight (00:00)
+/*
+  args[0]: hijri date
+  args[1]: timings table
+*/
+window.api.receive('setNewTimingsTable', (args) => {
+  document.getElementById('date-h').innerHTML = args[0]
+  document.getElementById('timings-table').innerHTML = args[1]
+})
+
 // Toogle settings by clicking the nav-icon.
-// TODO: change the size of the menubar to add more settings.
 document.getElementById('nav-icon').addEventListener('click', () => {
   toogleSettings()
   window.api.send('settings')
