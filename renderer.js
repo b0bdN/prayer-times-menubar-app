@@ -79,6 +79,17 @@ const getNextPrayer = () => {
       document.querySelector('.content .next-prayer').innerHTML = pNames[i].innerHTML
 
       break
+    } else if (pNames[i].innerHTML === 'Midnight' && t >= '00:00' && t < '01:00') {
+      const tomorrow = new Date()
+      tomorrow.setDate(tomorrow.getDate() + 1)
+      const tomorrowJSON = tomorrow.toJSON().slice(0, 10).replace(/-/g, '/')
+      const start = new Date(tomorrowJSON + ' ' + t)
+      const end = new Date(today + ' ' + timeString)
+
+      diffTime(start, end)
+      document.querySelector('.content .next-prayer').innerHTML = pNames[i].innerHTML
+
+      break
     } else if (timeString === (t + ':00')) {
       console.log(`It's ${pNames[i].innerHTML} time!`)
       // TODO: add sounds (https://www.electronjs.org/docs/latest/api/notification#playing-sounds)
@@ -91,19 +102,6 @@ const getNextPrayer = () => {
       new Notification(NOTIFICATION_TITLE, { body: NOTIFICATION_BODY }).show()
 
       break
-    } else if (pNames[i].innerHTML === 'Midnight') {
-      if (timeString > t) {
-        const tomorrow = new Date()
-        tomorrow.setDate(tomorrow.getDate() + 1)
-        const tomorrowJSON = tomorrow.toJSON().slice(0, 10).replace(/-/g, '/')
-        const start = new Date(tomorrowJSON + ' ' + t)
-        const end = new Date(today + ' ' + timeString)
-
-        diffTime(start, end)
-        document.querySelector('.content .next-prayer').innerHTML = pNames[i].innerHTML
-
-        break
-      }
     }
   }
 

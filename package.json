@@ -10,7 +10,7 @@
   "author": "b0bdN",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^16.0.8",
+    "electron": "^16.0.9",
     "standard": "^16.0.4"
   },
   "dependencies": {
