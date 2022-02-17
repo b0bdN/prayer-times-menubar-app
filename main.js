@@ -1,4 +1,4 @@
-const { app, globalShortcut, ipcMain } = require('electron')
+const { app, dialog, globalShortcut, ipcMain, net } = require('electron')
 const { menubar } = require('menubar')
 const path = require('path')
 const fetch = require('node-fetch')
@@ -98,17 +98,30 @@ mb.on('ready', async () => {
 
   // Geolocation - IPinfo.io
   function geolocation () {
-    console.log('Fetch geolocation via IPinfo.io.')
-    // NOTE: Enter your TOKEN from IPinfo.io
-    const TOKEN = config.TOKEN
+    if (net.online) {
+      console.log('Fetch geolocation via IPinfo.io.')
+      // NOTE: Enter your TOKEN from IPinfo.io
+      const TOKEN = config.TOKEN
 
-    fetch(`https://ipinfo.io/json?token=${TOKEN}`)
-      .then(res => res.json())
-      .then(json => {
-        // console.log(json.ip, json.city, json.country)
-        store.setCityCountry(json.city, json.country)
-      })
-      .catch(err => console.log(err))
+      fetch(`https://ipinfo.io/json?token=${TOKEN}`)
+        .then(res => res.json())
+        .then(json => {
+          // console.log(json.ip, json.city, json.country)
+          store.setCityCountry(json.city, json.country)
+        })
+        .catch(err => {
+          console.log('Geolocation API ERROR: ' + err)
+          dialog.showErrorBox(
+            'Oops! Something went wrong!',
+            `Check your internet connection and try again.\nThere may be an error with IPinfo.io\nError: ${err.message}`
+          )
+        })
+    } else {
+      dialog.showErrorBox(
+        'No internet connection',
+        'Check your internet connection and try again.\nUnable to get your geolocation.'
+      )
+    }
   }
 
   ipcMain.handle('find-city', () => {
@@ -143,14 +156,23 @@ mb.on('ready', async () => {
 
     console.log(url)
 
-    const response = await fetch(url)
-
-    if (response.ok) {
+    try {
+      const response = await fetch(url)
       const json = await response.json()
       store.setAladhan(json)
-    } else {
-      const text = await response.text()
-      console.log(`Error fetching data, status: '${response.status}', text: '${text}'`)
+    } catch (err) {
+      console.log(err)
+      if (net.online) {
+        dialog.showErrorBox(
+          'Oops! Something went wrong!',
+          `Check your internet connection and try again.\nThere may be an error with the Prayer Times APi.\n${err.message}`
+        )
+      } else {
+        dialog.showErrorBox(
+          'No internet connection',
+          'Check your internet connection and try again.'
+        )
+      }
     }
   }
 
