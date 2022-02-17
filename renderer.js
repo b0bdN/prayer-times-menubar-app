@@ -78,6 +78,11 @@ const getNextPrayer = () => {
       diffTime(start, end)
       document.querySelector('.content .next-prayer').innerHTML = pNames[i].innerHTML
 
+      window.api.send('setPrayerTray', [
+        pNames[i].innerHTML,
+        pTimes[i].innerHTML
+      ])
+
       break
     } else if (pNames[i].innerHTML === 'Midnight' && t >= '00:00' && t < '01:00') {
       const tomorrow = new Date()
@@ -88,6 +93,11 @@ const getNextPrayer = () => {
 
       diffTime(start, end)
       document.querySelector('.content .next-prayer').innerHTML = pNames[i].innerHTML
+
+      window.api.send('setPrayerTray', [
+        pNames[i].innerHTML,
+        pTimes[i].innerHTML
+      ])
 
       break
     } else if (timeString === (t + ':00')) {

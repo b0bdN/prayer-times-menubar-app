@@ -96,6 +96,11 @@ mb.on('ready', async () => {
 
   mb.showWindow()
 
+  // Set the next prayer by hovering over the tray icon.
+  ipcMain.on('setPrayerTray', (e, args) => {
+    mb.tray.setToolTip(`Next Prayer: ${args[0]} at ${args[1]}`)
+  })
+
   // Geolocation - IPinfo.io
   function geolocation () {
     if (net.online) {

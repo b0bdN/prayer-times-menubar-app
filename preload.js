@@ -3,7 +3,7 @@ const { contextBridge, ipcRenderer } = require('electron')
 contextBridge.exposeInMainWorld('api', {
   findCity: () => ipcRenderer.invoke('find-city'),
   send: (channel, data) => {
-    const validChannels = ['settings', 'getNewTimingsTable', 'apply-settings', 'close-app']
+    const validChannels = ['settings', 'getNewTimingsTable', 'setPrayerTray', 'apply-settings', 'close-app']
     if (validChannels.includes(channel)) {
       ipcRenderer.send(channel, data)
     }
