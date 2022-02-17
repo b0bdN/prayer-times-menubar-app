@@ -13,7 +13,7 @@ const mb = menubar({
     minHeight: 550,
     maxWidth: 560,
     maxHeight: 550,
-    // resizable: false,
+    resizable: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
@@ -197,12 +197,16 @@ mb.on('ready', async () => {
     if (width !== 280) {
       console.log('width 560 to 280')
       mb.hideWindow()
+      mb.window.setResizable(true)
       mb.window.setSize(280, height, true)
+      mb.window.setResizable(false)
       mb.showWindow()
     } else {
       console.log('width 280 to 560')
       mb.hideWindow()
+      mb.window.setResizable(true)
       mb.window.setSize(560, height, true)
+      mb.window.setResizable(false)
       mb.showWindow()
     }
   })
