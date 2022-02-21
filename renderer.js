@@ -1,6 +1,7 @@
 // Init data.
 /*
  args[0]: app version
+ args[1]: theme
  args[1]: city, Country
  args[2]: hijri date
  args[3]: timings table
@@ -11,25 +12,26 @@
 */
 window.api.receive('init-data', (args) => {
   document.getElementById('version').innerHTML = args[0]
-  document.getElementById('city').value = args[1]
-  document.getElementById('date-h').innerHTML = args[2]
-  document.getElementById('timings-table').innerHTML = args[3]
-  document.getElementById('calculation').value = args[4]
-  customMethod(args[4])
-  document.getElementById('checkImsak').checked = args[5]
-  document.getElementById('checkSunrise').checked = args[6]
-  document.getElementById('checkMidnight').checked = args[7]
-  if (args[8]) {
-    document.getElementById('tuneImsak').value = args[8].imsak
-    document.getElementById('tuneFajr').value = args[8].fajr
-    document.getElementById('tuneSunrise').value = args[8].sunrise
-    document.getElementById('tuneDhuhr').value = args[8].dhuhr
-    document.getElementById('tuneAsr').value = args[8].asr
-    document.getElementById('tuneMaghrib').value = args[8].maghrib
-    document.getElementById('tuneIsha').value = args[8].isha
-    document.getElementById('tuneMidnight').value = args[8].midnight
+  document.getElementById('theme').value = args[1]
+  document.getElementById('city').value = args[2]
+  document.getElementById('date-h').innerHTML = args[3]
+  document.getElementById('timings-table').innerHTML = args[4]
+  document.getElementById('calculation').value = args[5]
+  customMethod(args[5])
+  document.getElementById('checkImsak').checked = args[6]
+  document.getElementById('checkSunrise').checked = args[7]
+  document.getElementById('checkMidnight').checked = args[8]
+  if (args[9]) {
+    document.getElementById('tuneImsak').value = args[9].imsak
+    document.getElementById('tuneFajr').value = args[9].fajr
+    document.getElementById('tuneSunrise').value = args[9].sunrise
+    document.getElementById('tuneDhuhr').value = args[9].dhuhr
+    document.getElementById('tuneAsr').value = args[9].asr
+    document.getElementById('tuneMaghrib').value = args[9].maghrib
+    document.getElementById('tuneIsha').value = args[9].isha
+    document.getElementById('tuneMidnight').value = args[9].midnight
   }
-  if (args[9] === '0') {
+  if (args[10] === '0') {
     document.getElementById('midnightStd').checked = true
     document.getElementById('midnightJafari').checked = false
   } else {
@@ -71,12 +73,15 @@ const getNextPrayer = () => {
     const t = pTimes[i].innerHTML
     const today = new Date().toJSON().slice(0, 10).replace(/-/g, '/') // today = YYYY/MM/DD
 
+    document.getElementsByClassName('row')[i].classList.remove('row-focus')
+
     if (timeString < t) {
       const start = new Date(today + ' ' + t)
       const end = new Date(today + ' ' + timeString)
 
       diffTime(start, end)
       document.querySelector('.content .next-prayer').innerHTML = pNames[i].innerHTML
+      document.getElementsByClassName('row')[i].classList.add('row-focus')
 
       window.api.send('setPrayerTray', [
         pNames[i].innerHTML,
@@ -93,6 +98,7 @@ const getNextPrayer = () => {
 
       diffTime(start, end)
       document.querySelector('.content .next-prayer').innerHTML = pNames[i].innerHTML
+      document.getElementsByClassName('row')[i].classList.add('row-focus')
 
       window.api.send('setPrayerTray', [
         pNames[i].innerHTML,
@@ -145,14 +151,22 @@ window.api.receive('setNewTimingsTable', (args) => {
   document.getElementById('timings-table').innerHTML = args[1]
 })
 
-// Toogle settings by clicking the nav-icon.
+// Toggle settings by clicking the nav-icon.
 document.getElementById('nav-icon').addEventListener('click', () => {
-  toogleSettings()
+  toggleSettings()
+  window.api.send('settings')
+})
+
+// Theme
+document.getElementById('theme').addEventListener('change', () => {
+  const theme = document.getElementById('theme').value
+  window.api.toggleTheme(theme)
+  toggleSettings()
   window.api.send('settings')
 })
 
 // Check if the settings pannel is hidden or visible.
-const toogleSettings = () => {
+const toggleSettings = () => {
   const settings = document.querySelector('#settings .content')
   if (settings.classList.contains('hidden')) {
     console.log('Settings is now visible.')
@@ -204,14 +218,13 @@ document.getElementById('calculation').addEventListener('click', () => {
 // Show/Hide the angles settings.
 const customMethod = (method) => {
   if (method === '99') {
-    document.getElementById('custom-angle').style.display = 'flex'
+    document.getElementById('custom-angle').style.display = 'block'
   } else {
     document.getElementById('custom-angle').style.display = 'none'
   }
 }
 
 // Apply button.
-// TODO: add custom angle + tune (https://aladhan.com/calculation-methods).
 document.getElementById('apply-btn').addEventListener('click', () => {
   const cityCountry = document.getElementById('city').value
   const method = document.getElementById('calculation').value
@@ -262,7 +275,7 @@ window.api.receive('update-data', (data) => {
   document.getElementById('checkImsak').checked = data[2]
   document.getElementById('checkSunrise').checked = data[3]
   document.getElementById('checkMidnight').checked = data[4]
-  toogleSettings()
+  toggleSettings()
   window.api.send('settings')
 })
 

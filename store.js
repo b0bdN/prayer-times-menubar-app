@@ -117,6 +117,9 @@ const getTableTimings = (newMonth, newDate) => {
   return tTable
 }
 
+const setTheme = (theme) => store.set({ theme: theme })
+const getTheme = () => store.get('theme')
+
 exports.setCityCountry = setCityCountry
 exports.getCityCountry = getCityCountry
 exports.getCity = getCity
@@ -140,3 +143,5 @@ exports.setAladhan = setAladhan
 exports.getCode = getCode
 exports.getHijriDate = getHijriDate
 exports.getTableTimings = getTableTimings
+exports.setTheme = setTheme
+exports.getTheme = getTheme

@@ -1,4 +1,4 @@
-const { app, dialog, globalShortcut, ipcMain, net } = require('electron')
+const { app, dialog, globalShortcut, ipcMain, nativeTheme, net } = require('electron')
 const { menubar } = require('menubar')
 const path = require('path')
 const fetch = require('node-fetch')
@@ -9,10 +9,6 @@ const mb = menubar({
   browserWindow: {
     width: 280,
     height: 550,
-    minWidth: 280,
-    minHeight: 550,
-    maxWidth: 560,
-    maxHeight: 550,
     resizable: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
@@ -68,6 +64,12 @@ mb.on('ready', async () => {
 
   const initData = () => {
     console.log('Storage: fetching data..')
+
+    // Theme
+    const theme = store.getTheme() ? store.getTheme() : 'system'
+    setNativeTheme(theme)
+
+    // Settings
     const cc = store.getCityCountry()
     const hijriDate = store.getHijriDate()
     const calcMethod = store.getCalcMethod() ? store.getCalcMethod() : 'auto'
@@ -80,6 +82,7 @@ mb.on('ready', async () => {
 
     mb.window.webContents.send('init-data', [
       app.getVersion(),
+      theme,
       cc,
       hijriDate,
       tableTimings,
@@ -99,6 +102,23 @@ mb.on('ready', async () => {
   // Set the next prayer by hovering over the tray icon.
   ipcMain.on('setPrayerTray', (e, args) => {
     mb.tray.setToolTip(`Next Prayer: ${args[0]} at ${args[1]}`)
+  })
+
+  function setNativeTheme (theme) {
+    if (theme === 'system') {
+      nativeTheme.themeSource = 'system'
+    } else if (theme === 'dark') {
+      nativeTheme.themeSource = 'dark'
+    } else if (theme === 'light') {
+      nativeTheme.themeSource = 'light'
+    }
+  }
+
+  // Toggle the theme of the app.
+  ipcMain.handle('theme:toggle', (e, theme) => {
+    console.log(`Theme selected: ${theme}`)
+    store.setTheme(theme)
+    setNativeTheme(theme)
   })
 
   // Geolocation - IPinfo.io
@@ -198,26 +218,28 @@ mb.on('ready', async () => {
   // Settings: change the window's size.
   // TODO: find another method instead of hideWindow() and showWindow().
   ipcMain.on('settings', () => {
-    const [width, height] = mb.window.getSize()
-    if (width !== 280) {
-      console.log('width 560 to 280')
+    const width = mb.window.getSize()[0] // getSize() return [with, height]
+    const [minWidth, minHeight] = [280, 550]
+    const [maxWidth, maxHeight] = [560, 620]
+
+    if (width !== minWidth) {
+      console.log(`width ${maxWidth} to ${minWidth}`)
       mb.hideWindow()
       mb.window.setResizable(true)
-      mb.window.setSize(280, height, true)
+      mb.window.setSize(minWidth, minHeight, true)
       mb.window.setResizable(false)
       mb.showWindow()
     } else {
-      console.log('width 280 to 560')
+      console.log(`width ${minWidth} to ${maxWidth}`)
       mb.hideWindow()
       mb.window.setResizable(true)
-      mb.window.setSize(560, height, true)
+      mb.window.setSize(maxWidth, maxHeight, true)
       mb.window.setResizable(false)
       mb.showWindow()
     }
   })
 
   // Apply the new settings - button.
-  // TODO: check if online/offline and input an error if offline.
   ipcMain.on('apply-settings', async (event, args) => {
     console.log('Apply button clicked.')
     let changed = false // init to know if a parameter has been changed.
