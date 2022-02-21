@@ -4,7 +4,8 @@
 
 A menubar application for displaying the prayer times from your city.
 
-![prayer-times](./assets/screenshots/prayer-times.png)  ![prayer-times-settings](./assets/screenshots/prayer-times-settings.png)
+![prayer-times screenshot - dark](./assets/screenshots/prayer-times-dark.png)
+![prayer-times screenshot - light](./assets/screenshots/prayer-times-light.png)
 
 ## Features
 
@@ -12,6 +13,7 @@ A menubar application for displaying the prayer times from your city.
 - Change the calculation method or custom the angles for Fajr and Isha prayers
 - Create your own method by changing the times of the different prayers
 - Show additional times like Imsak, Sunrise and Midnight
+- Dark and Light mode. Follow by default the system.
 
 #### Geolocation
 
@@ -28,8 +30,14 @@ You can use the following shortcuts: <br>
 
 ## Development
 
-- You will need a **TOKEN** form [IPinfo.io](https://ipinfo.io/).
+- You will need a **TOKEN** from [IPinfo.io](https://ipinfo.io/).
 ```js
+config.js
+
+const TOKEN = 'your.token'
+exports.TOKEN = TOKEN
+
+---
 main.js
 
 function geolocation () {
@@ -47,11 +55,11 @@ function geolocation () {
 }
 ```
 
-- [node-fetch](https://github.com/node-fetch/node-fetch/tree/2.x#readme) v2.x is used because the ES Modules is not in use in this app.
+- [node-fetch](https://github.com/node-fetch/node-fetch/tree/2.x#readme) v2.x is used because the ES Modules are not in use in this app.
 
 ## Contributing
 
-Contributions are welcomed !
+Contributions are welcomed!
 
 ## Translations
 
