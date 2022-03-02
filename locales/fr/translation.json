@@ -1,0 +1,74 @@
+{
+  "geo": {
+    "city": "Ville",
+    "ISO": "Trouver les codes de pays"
+  },
+  "calc": {
+    "title": "Méthode de calcul",
+    "auto": "Automatique",
+    "custom": "Personalisé",
+    "MWL": "Ligue Islamique Mondiale",
+    "ISNA": "Société Islamique d'Amérique du Nord",
+    "EGAS": "Autorité Générale d'Étude Égyptienne",
+    "UAQU": "Université Umm Al-Qura, La Mecque",
+    "UIS": "Université des Sciences Islamiques, Karachi",
+    "IG": "Institut de Géophysique, Université de Téhéran",
+    "SIA": "Shia Ithna-Ashari, Institut Leva, Qum",
+    "Gulf": "Région du Golfe",
+    "Kuwait": "Koweït",
+    "Quatar": "Qatar",
+    "MUIS": "Conseil religieux islamique de Singapour, Singapour",
+    "UOIF": "Union des Organisations Islamiques de France",
+    "DIB": "Présidence des affaires religieuses, Turquie",
+    "SAMR": "Administration spirituelle des musulmans de Russie"
+  },
+  "add": {
+    "title": "Afficher les heures supplémentaires"
+  },
+  "prayer": {
+    "Imsak": "Imsak",
+    "Sunrise": "Lever du soleil",
+    "Midnight": "Minuit",
+    "Fajr": "Fajr",
+    "Dhuhr": "Dhuhr",
+    "Asr": "Asr",
+    "Maghrib": "Maghrib",
+    "Isha": "Isha"
+  },
+  "angles": {
+    "title": "Angles personnalisés",
+    "fajr": "Angle du Fajr (°)",
+    "isha": "Angle de Isha (°)"
+  },
+  "midnight": {
+    "title": "Paramètre pour 'Miniuit'",
+    "SuToSu": "Entre le coucher et le lever du soleil",
+    "SuToFa": "Entre le coucher du soleil et le Fajr"
+  },
+  "adj": {
+    "title": "Ajustements manuels des temps"
+  },
+  "theme": {
+    "title": "Thème",
+    "system": "Système",
+    "dark": "Sombre",
+    "light": "Claire"
+  },
+  "language": "Langue",
+  "btn": {
+    "apply": "Appliquer",
+    "quit": "Quiter"
+  },
+  "footer": {
+    "version": "prayer times version",
+    "credits": "Crédits"
+  },
+  "apiError": {
+    "title": "Oups ! Quelque chose a mal tourné !",
+    "message": "Il peut y avoir une erreur avec l'API de {{api}}.\n${{err}}"
+  },
+  "noInternet" : {
+    "title": "Pas de connexion internet",
+    "message": "Vérifiez votre connexion internet et réessayez."
+  }
+}

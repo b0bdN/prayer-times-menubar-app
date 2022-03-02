@@ -1,0 +1,11 @@
+{
+  "prayer": {
+    "Imsak": "prayer.Imsak",
+    "Fajr": "prayer.Fajr",
+    "Dhuhr": "prayer.Dhuhr",
+    "Asr": "prayer.Asr",
+    "Maghrib": "prayer.Maghrib",
+    "Isha": "prayer.Isha",
+    "Midnight": "prayer.Midnight"
+  }
+}

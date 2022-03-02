@@ -14,5 +14,7 @@ contextBridge.exposeInMainWorld('api', {
       ipcRenderer.on(channel, (event, ...args) => func(...args))
     }
   },
-  toggleTheme: (theme) => ipcRenderer.invoke('theme:toggle', theme)
+  toggleTheme: (theme) => ipcRenderer.invoke('theme:toggle', theme),
+  toggleLanguage: (...args) => ipcRenderer.invoke('language:toggle', ...args),
+  loadTranslations: (keys) => ipcRenderer.invoke('load-translations', keys)
 })

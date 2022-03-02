@@ -2,42 +2,61 @@
 /*
  args[0]: app version
  args[1]: theme
- args[1]: city, Country
- args[2]: hijri date
- args[3]: timings table
- args[4]: calculation method
- args[5 - 7]: checkbox imsak, sunrise, midnight
- args[8]: tunes
- args[9]: midnightMode
+ args[2]: language
+ args[3]: city, Country
+ args[4]: hijri date
+ args[5]: timings table
+ args[6]: calculation method
+ args[7 - 9]: checkbox imsak, sunrise, midnight
+ args[10]: tunes
+ args[11]: midnightMode
 */
 window.api.receive('init-data', (args) => {
+  // Settings
   document.getElementById('version').innerHTML = args[0]
   document.getElementById('theme').value = args[1]
-  document.getElementById('city').value = args[2]
-  document.getElementById('date-h').innerHTML = args[3]
-  document.getElementById('timings-table').innerHTML = args[4]
-  document.getElementById('calculation').value = args[5]
-  customMethod(args[5])
-  document.getElementById('checkImsak').checked = args[6]
-  document.getElementById('checkSunrise').checked = args[7]
-  document.getElementById('checkMidnight').checked = args[8]
-  if (args[9]) {
-    document.getElementById('tuneImsak').value = args[9].imsak
-    document.getElementById('tuneFajr').value = args[9].fajr
-    document.getElementById('tuneSunrise').value = args[9].sunrise
-    document.getElementById('tuneDhuhr').value = args[9].dhuhr
-    document.getElementById('tuneAsr').value = args[9].asr
-    document.getElementById('tuneMaghrib').value = args[9].maghrib
-    document.getElementById('tuneIsha').value = args[9].isha
-    document.getElementById('tuneMidnight').value = args[9].midnight
+  document.getElementById('language').value = args[2]
+  document.getElementById('city').value = args[3]
+  document.getElementById('date-h').innerHTML = args[4]
+  document.getElementById('timings-table').innerHTML = args[5]
+  document.getElementById('calculation').value = args[6]
+  customMethod(args[6])
+  document.getElementById('checkImsak').checked = args[7]
+  document.getElementById('checkSunrise').checked = args[8]
+  document.getElementById('checkMidnight').checked = args[9]
+  if (args[10]) {
+    document.getElementById('tuneImsak').value = args[10].imsak
+    document.getElementById('tuneFajr').value = args[10].fajr
+    document.getElementById('tuneSunrise').value = args[10].sunrise
+    document.getElementById('tuneDhuhr').value = args[10].dhuhr
+    document.getElementById('tuneAsr').value = args[10].asr
+    document.getElementById('tuneMaghrib').value = args[10].maghrib
+    document.getElementById('tuneIsha').value = args[10].isha
+    document.getElementById('tuneMidnight').value = args[10].midnight
   }
-  if (args[10] === '0') {
+  if (args[11] === '0') {
     document.getElementById('midnightStd').checked = true
     document.getElementById('midnightJafari').checked = false
   } else {
     document.getElementById('midnightStd').checked = false
     document.getElementById('midnightJafari').checked = true
   }
+
+  // Language (i18n) - onload
+  function loadTranslations () {
+    const translatabeElem = document.querySelectorAll('[data-i18n]')
+    const keys = []
+    for (let i = 0; i < translatabeElem.length; i++) {
+      keys.push(translatabeElem[i].getAttribute('data-i18n'))
+    }
+
+    window.api.loadTranslations(keys).then((values) => {
+      translatabeElem.forEach((elem, i) => {
+        elem.innerHTML = values[i]
+      })
+    })
+  }
+  loadTranslations()
 })
 
 // Get today's date and time (Gregorian).
@@ -163,6 +182,25 @@ document.getElementById('theme').addEventListener('change', () => {
   window.api.toggleTheme(theme)
   toggleSettings()
   window.api.send('settings')
+})
+
+// Language (i18n) - toggle language
+document.getElementById('language').addEventListener('change', () => {
+  const language = document.getElementById('language').value
+  const translatabeElem = document.querySelectorAll('[data-i18n]')
+
+  const keys = []
+  for (let i = 0; i < translatabeElem.length; i++) {
+    keys.push(translatabeElem[i].getAttribute('data-i18n'))
+  }
+
+  window.api.toggleLanguage([language, keys]).then((values) => {
+    translatabeElem.forEach((elem, i) => {
+      elem.innerHTML = values[i]
+    })
+    toggleSettings()
+    window.api.send('settings')
+  })
 })
 
 // Check if the settings pannel is hidden or visible.

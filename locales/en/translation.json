@@ -1,0 +1,74 @@
+{
+  "geo": {
+    "city": "City",
+    "ISO": "Find Country codes"
+  },
+  "calc": {
+    "title": "Calculation method",
+    "auto": "Auto detect",
+    "custom": "Custom",
+    "MWL": "Muslim World League",
+    "ISNA": "Islamic Society of North America",
+    "EGAS": "Egyptian General Authority of Survey",
+    "UAQU": "Umm Al-Qura University, Makkah",
+    "UIS": "University of Islamic Sciences, Karachi",
+    "IG": "Institute of Geophysics, University of Tehran",
+    "SIA": "Shia Ithna-Ashari, Leva Institute, Qum",
+    "Gulf": "Gulf Region",
+    "Kuwait": "Kuwait",
+    "Quatar": "Qatar",
+    "MUIS": "Islamic Religious Council of Singapore, Singapore",
+    "UOIF": "Union des Organisations Islamiques de France",
+    "DIB": "Presidency of Religious Affairs, Turkey",
+    "SAMR": "Spiritual Administration of Muslims of Russia"
+  },
+  "add": {
+    "title": "Show additional times"
+  },
+  "prayer": {
+    "Imsak": "Imsak",
+    "Sunrise": "Sunrise",
+    "Midnight": "Midnight",
+    "Fajr": "Fajr",
+    "Dhuhr": "Dhuhr",
+    "Asr": "Asr",
+    "Maghrib": "Maghrib",
+    "Isha": "Isha"
+  },
+  "angles": {
+    "title": "Custom angles",
+    "fajr": "Fajr angle (°)",
+    "isha": "Isha angle (°)"
+  },
+  "midnight": {
+    "title": "Midnight mode",
+    "SuToSu": "Mid Sunset to Sunrise",
+    "SuToFa": "Mid Sunset to Fajr"
+  },
+  "adj": {
+    "title": "Manual times adjustments"
+  },
+  "theme": {
+    "title": "Theme",
+    "system": "System",
+    "dark": "Dark",
+    "light": "Light"
+  },
+  "language": "Language",
+  "btn": {
+    "apply": "Apply",
+    "quit": "Quit"
+  },
+  "footer": {
+    "version": "prayer times version",
+    "credits": "Credits"
+  },
+  "apiError": {
+    "title": "Oops! Something went wrong!",
+    "message": "There may be an error with {{api}} API.\n${{err}}"
+  },
+  "noInternet" : {
+    "title": "No internet connection",
+    "message": "Check your internet connection and try again."
+  }
+}
