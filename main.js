@@ -22,9 +22,9 @@ const mb = menubar({
 // console.log(app.getPath('userData'))
 
 // openDevTools.
-// mb.on('after-create-window', () => {
-//   mb.window.openDevTools()
-// })
+mb.on('after-create-window', () => {
+  mb.window.openDevTools()
+})
 
 // To avoid flash when opening the menubar app.
 mb.app.commandLine.appendSwitch('disable-backgrounding-occluded-windows', 'true')
@@ -260,7 +260,7 @@ mb.on('ready', async () => {
   ipcMain.on('settings', () => {
     const width = mb.window.getSize()[0] // getSize() return [with, height]
     const [minWidth, minHeight] = [280, 550]
-    const [maxWidth, maxHeight] = [560, 620]
+    const [maxWidth, maxHeight] = [560, 700]
 
     if (width !== minWidth) {
       console.log(`width ${maxWidth} to ${minWidth}`)

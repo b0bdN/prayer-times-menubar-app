@@ -211,7 +211,7 @@ const toggleSettings = () => {
     document.getElementById('main').style.height = '110px'
     visibleOrHidden('#main .content', 'hidden')
     visibleOrHidden('#details', 'hidden')
-    document.getElementById('settings').style.height = '360px'
+    document.getElementById('settings').style.height = '590px'
     visibleOrHidden('#settings .content', 'visible')
     document.getElementById('nav-icon').className = 'open'
   } else {

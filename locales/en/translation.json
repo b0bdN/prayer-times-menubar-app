@@ -22,12 +22,12 @@
     "DIB": "Presidency of Religious Affairs, Turkey",
     "SAMR": "Spiritual Administration of Muslims of Russia"
   },
-  "add": {
-    "title": "Show additional times"
+  "adj": {
+    "title": "Manual times adjustments"
   },
   "prayer": {
     "Imsak": "Imsak",
-    "Sunrise": "Sunrise",
+    "Sunrise": "Shourouq",
     "Midnight": "Midnight",
     "Fajr": "Fajr",
     "Dhuhr": "Dhuhr",
@@ -40,13 +40,13 @@
     "fajr": "Fajr angle (°)",
     "isha": "Isha angle (°)"
   },
+  "add": {
+    "title": "Show additional times"
+  },
   "midnight": {
     "title": "Midnight mode",
     "SuToSu": "Mid Sunset to Sunrise",
     "SuToFa": "Mid Sunset to Fajr"
-  },
-  "adj": {
-    "title": "Manual times adjustments"
   },
   "theme": {
     "title": "Theme",

@@ -22,31 +22,31 @@
     "DIB": "calc.DIB",
     "SAMR": "calc.SAMR"
   },
-  "add": {
-    "title": "add.title"
+  "adj": {
+    "title": "adj.title"
   },
   "prayer": {
     "Imsak": "prayer.Imsak",
-    "Sunrise": "prayer.Sunrise",
-    "Midnight": "prayer.Midnight",
     "Fajr": "prayer.Fajr",
+    "Sunrise": "prayer.Sunrise",
     "Dhuhr": "prayer.Dhuhr",
     "Asr": "prayer.Asr",
     "Maghrib": "prayer.Maghrib",
-    "Isha": "prayer.Isha"
+    "Isha": "prayer.Isha",
+    "Midnight": "prayer.Midnight"
   },
   "angles": {
     "title": "angles.title",
     "fajr": "angles.fajr",
     "isha": "angles.isha"
   },
+  "add": {
+    "title": "add.title"
+  },
   "midnight": {
     "title": "midnight.title",
     "SuToSu": "midnight.SuToSu",
     "SuToFa": "midnight.SuToFa"
-  },
-  "adj": {
-    "title": "adj.title"
   },
   "theme": {
     "title": "theme.title",
