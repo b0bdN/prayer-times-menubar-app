@@ -1,0 +1,74 @@
+{
+  "geo": {
+    "city": "City",
+    "ISO": "Find Country codes"
+  },
+  "calc": {
+    "title": "calc.title",
+    "auto": "calc.auto",
+    "custom": "calc.custom",
+    "MWL": "calc.MWL",
+    "ISNA": "calc.ISNA",
+    "EGAS": "calc.EGAS",
+    "UAQU": "calc.UAQU",
+    "UIS": "calc.UIS",
+    "IG": "calc.IG",
+    "SIA": "calc.SIA",
+    "Gulf": "calc.Gulf",
+    "Kuwait": "calc.Kuwait",
+    "Quatar": "calc.Quatar",
+    "MUIS": "calc.MUIS",
+    "UOIF": "calc.UOIF",
+    "DIB": "calc.DIB",
+    "SAMR": "calc.SAMR"
+  },
+  "adj": {
+    "title": "adj.title"
+  },
+  "prayer": {
+    "Imsak": "prayer.Imsak",
+    "Fajr": "prayer.Fajr",
+    "Sunrise": "prayer.Sunrise",
+    "Dhuhr": "prayer.Dhuhr",
+    "Asr": "prayer.Asr",
+    "Maghrib": "prayer.Maghrib",
+    "Isha": "prayer.Isha",
+    "Midnight": "prayer.Midnight"
+  },
+  "angles": {
+    "title": "angles.title",
+    "fajr": "angles.fajr",
+    "isha": "angles.isha"
+  },
+  "add": {
+    "title": "add.title"
+  },
+  "midnight": {
+    "title": "midnight.title",
+    "SuToSu": "midnight.SuToSu",
+    "SuToFa": "midnight.SuToFa"
+  },
+  "theme": {
+    "title": "theme.title",
+    "system": "theme.system",
+    "dark": "theme.dark",
+    "light": "theme.light"
+  },
+  "language": "language",
+  "btn": {
+    "apply": "btn.apply",
+    "quit": "btn.quit"
+  },
+  "footer": {
+    "version": "footer.version",
+    "credits": "footer.credits"
+  },
+  "apiError": {
+    "title": "apiError.title",
+    "message": "apiError.message"
+  },
+  "noInternet": {
+    "title": "noInternet.title",
+    "message": "noInternet.message"
+  }
+}

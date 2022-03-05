@@ -36,8 +36,9 @@
   }
 
   a,
-  .add-flex label,
-  .number-input label {
+  .grid-check label,
+  .number-input label,
+  .angle label {
     color: #889391;
   }
 
@@ -102,8 +103,9 @@
   }
 
   a,
-  .add-flex label,
-  .number-input label {
+  .grid-check label,
+  .number-input label,
+  .angle label {
     color: #6f7977;
   }
 
@@ -329,6 +331,7 @@ a:hover {
 
 #settings {
   height: 0;
+  overflow: hidden;
   transition: all 1s ease-in-out;
   width: 100%;
   z-index: 5;
@@ -346,6 +349,12 @@ a:hover {
   width: 100%;
 }
 
+.grid-item-span {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  display: contents;
+}
+
 .form-item {
   box-sizing: border-box;
   min-height: 30px;
@@ -360,9 +369,11 @@ a:hover {
 
 .angle {
   align-items: baseline;
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 5px 0;
 }
 
 label {
@@ -380,11 +391,15 @@ select {
   font-size: 16px;
   outline: none;
   padding: 10px;
-  width: 100%;
 }
 
 input[type="text"][name="city"] {
   padding-right: 40px;
+}
+
+input[type="text"],
+select {
+  width: 100%;
 }
 
 input[type="number"] {
@@ -408,14 +423,15 @@ input[type="number"]::-webkit-inner-spin-button {
   width: 20px;
 }
 
-.add-flex {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+.grid-check {
+  column-gap: 15px;
+  display: inline-grid;
+  grid-template-columns: 20px auto;
 }
 
-.add-flex label {
+.grid-check label {
   font-size: 16px;
+  cursor: pointer;
 }
 
 .help {
@@ -436,7 +452,7 @@ button {
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 14px;
-  padding: 4px;
+  padding: 10px;
   text-align: center;
   transition: all 0.3s ease-in-out;
   width: 49%;

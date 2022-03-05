@@ -111,7 +111,7 @@ const getTableTimings = (newMonth, newDate) => {
 
   let tTable = ''
   for (let i = 0; i < tTime.length; i++) {
-    tTable += '<div class="row"><div class="p-name column">' + tName[i] + '</div><div class="p-time column">' + tTime[i] + '</div></div>'
+    tTable += `<div class="row"><div class="p-name column" data-i18n="prayer.${tName[i]}">${tName[i]}</div><div class="p-time column">${tTime[i]}</div></div>`
   }
 
   return tTable
@@ -119,6 +119,9 @@ const getTableTimings = (newMonth, newDate) => {
 
 const setTheme = (theme) => store.set({ theme: theme })
 const getTheme = () => store.get('theme')
+
+const setLanguage = (lng) => store.set({ language: lng })
+const getLanguage = () => store.get('language')
 
 exports.setCityCountry = setCityCountry
 exports.getCityCountry = getCityCountry
@@ -145,3 +148,5 @@ exports.getHijriDate = getHijriDate
 exports.getTableTimings = getTableTimings
 exports.setTheme = setTheme
 exports.getTheme = getTheme
+exports.setLanguage = setLanguage
+exports.getLanguage = getLanguage

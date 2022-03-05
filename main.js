@@ -4,6 +4,7 @@ const path = require('path')
 const fetch = require('node-fetch')
 const config = require('./config.js')
 const store = require('./store.js')
+const i18next = require('./i18next.config.js')
 
 const mb = menubar({
   browserWindow: {
@@ -21,12 +22,22 @@ const mb = menubar({
 // console.log(app.getPath('userData'))
 
 // openDevTools.
-// mb.on('after-create-window', () => {
-//   mb.window.openDevTools()
-// })
+mb.on('after-create-window', () => {
+  mb.window.openDevTools()
+})
 
 // To avoid flash when opening the menubar app.
 mb.app.commandLine.appendSwitch('disable-backgrounding-occluded-windows', 'true')
+
+// Language (i18n) - on load
+ipcMain.handle('load-translations', (e, keys) => {
+  const values = []
+  for (const i in keys) {
+    values.push(i18next.t(keys[i]))
+  }
+
+  return values
+})
 
 mb.on('ready', async () => {
   console.log('starting')
@@ -69,6 +80,10 @@ mb.on('ready', async () => {
     const theme = store.getTheme() ? store.getTheme() : 'system'
     setNativeTheme(theme)
 
+    // Language (i18n)
+    const language = store.getLanguage() ? store.getLanguage() : app.getLocale().split('-')[0]
+    changeLanguage(language)
+
     // Settings
     const cc = store.getCityCountry()
     const hijriDate = store.getHijriDate()
@@ -83,6 +98,7 @@ mb.on('ready', async () => {
     mb.window.webContents.send('init-data', [
       app.getVersion(),
       theme,
+      language,
       cc,
       hijriDate,
       tableTimings,
@@ -98,6 +114,30 @@ mb.on('ready', async () => {
   initData()
 
   mb.showWindow()
+
+  // Language (i18n) - toggle
+  function changeLanguage (newLng) {
+    i18next.changeLanguage(newLng, (err, t) => {
+      if (err) return console.log('something went wrong loading', err)
+    })
+  }
+
+  /*
+  args[0]: language selected
+  args[2]: all translatabe elem [data-i18n]
+  */
+  ipcMain.handle('language:toggle', (e, args) => {
+    store.setLanguage(args[0])
+    changeLanguage(args[0])
+
+    const keys = args[1]
+    const values = []
+    for (const i in keys) {
+      values.push(i18next.t(keys[i]))
+    }
+
+    return values
+  })
 
   // Set the next prayer by hovering over the tray icon.
   ipcMain.on('setPrayerTray', (e, args) => {
@@ -137,14 +177,14 @@ mb.on('ready', async () => {
         .catch(err => {
           console.log('Geolocation API ERROR: ' + err)
           dialog.showErrorBox(
-            'Oops! Something went wrong!',
-            `Check your internet connection and try again.\nThere may be an error with IPinfo.io\nError: ${err.message}`
+            i18next.t('apiError.title'),
+            i18next.t('apiError.message', { api: 'IPinfo.io', err: err.message })
           )
         })
     } else {
       dialog.showErrorBox(
-        'No internet connection',
-        'Check your internet connection and try again.\nUnable to get your geolocation.'
+        i18next.t('noInternet.title'),
+        i18next.t('noInternet.message')
       )
     }
   }
@@ -189,13 +229,13 @@ mb.on('ready', async () => {
       console.log(err)
       if (net.online) {
         dialog.showErrorBox(
-          'Oops! Something went wrong!',
-          `Check your internet connection and try again.\nThere may be an error with the Prayer Times APi.\n${err.message}`
+          i18next.t('apiError.title'),
+          i18next.t('apiError.message', { api: 'Aladhan', err: err.message })
         )
       } else {
         dialog.showErrorBox(
-          'No internet connection',
-          'Check your internet connection and try again.'
+          i18next.t('noInternet.title'),
+          i18next.t('noInternet.message')
         )
       }
     }
@@ -220,7 +260,7 @@ mb.on('ready', async () => {
   ipcMain.on('settings', () => {
     const width = mb.window.getSize()[0] // getSize() return [with, height]
     const [minWidth, minHeight] = [280, 550]
-    const [maxWidth, maxHeight] = [560, 620]
+    const [maxWidth, maxHeight] = [560, 700]
 
     if (width !== minWidth) {
       console.log(`width ${maxWidth} to ${minWidth}`)

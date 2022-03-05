@@ -32,13 +32,13 @@ You can use the following shortcuts: <br>
 
 - You will need a **TOKEN** from [IPinfo.io](https://ipinfo.io/).
 ```js
-config.js
+// config.js
 
 const TOKEN = 'your.token'
 exports.TOKEN = TOKEN
 
 ---
-main.js
+// main.js
 
 function geolocation () {
   console.log('Fetch geolocation via IPinfo.io.')
@@ -59,11 +59,20 @@ function geolocation () {
 
 ## Contributing
 
-Contributions are welcomed!
+Contributions are welcome!
 
 ## Translations
 
+Follow these steps to translate the app in you language:
+1. Create a folder with the 2 letters of your language in `./locales/`
+2. Copy [this file](./locales/en/translation.json) (`./locales/en/translation.json`) in your folder
+3. Start translating! :)
+
+Note: the words between braces (e.g.:`{{api}}`) shouldn't be translated.
+
+Available translations:
 - English
+- French
 
 ## Credit | Dependencies
 
@@ -74,8 +83,16 @@ Contributions are welcomed!
 - [RESTful Prayer TImes API](https://aladhan.com/prayer-times-api) from [Aladhan.com](https://aladhan.com/)
 - [IPinfo.io](https://ipinfo.io/)
 - [Remix Icon](https://github.com/Remix-Design/RemixIcon)
+- [i18next](https://www.i18next.com/) internationalization framework
 - Logo: Islam by Olena Panasovska from NounProject.com
 
-## Licence
+## Donations
+Donations can be made via cryptocurrencies:
+- XMR: `88TyfPkBEh44NFwdy5wMtv5M1aJFgNpWq4S97oZhSPwcCr4ah8cWyCRe8qE1Q3n9sAirVF23u6FkMCdSGiJSyLhHN5UcjcL`
+- BTC: `bc1qthw8u4he9zj6ajnfqxq6z5ang6w24hdds8j68r`
+
+Thank you!!
+
+## License
 
 [MIT](LICENSE)
