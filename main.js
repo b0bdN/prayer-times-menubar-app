@@ -391,6 +391,10 @@ mb.on('ready', async () => {
   // Notifications
   mb.app.setAppUserModelId(process.execPath)
 
+  // City, Country input validation
+  ipcMain.on('invalidWarning', async (e, args) => {
+    dialog.showErrorBox(`Invalid City and Country: "${args[0]}"`, 'Please seperate the city and country inputs with a single comma.')
+  })
   // Close the app - button.
   ipcMain.on('close-app', () => {
     console.log('Close button clicked.')

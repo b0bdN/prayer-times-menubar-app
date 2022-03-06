@@ -281,24 +281,33 @@ document.getElementById('apply-btn').addEventListener('click', () => {
   const tuneMidnight = document.getElementById('tuneMidnight').value
   const midnightMode = document.querySelector('input[name="midnightMode"]:checked').value
 
-  window.api.send('apply-settings', [
-    cityCountry,
-    method,
-    fajrAngle,
-    ishaAngle,
-    checkImsak,
-    checkSunrise,
-    checkMidnight,
-    tuneImsak,
-    tuneFajr,
-    tuneSunrise,
-    tuneDhuhr,
-    tuneAsr,
-    tuneMaghrib,
-    tuneIsha,
-    tuneMidnight,
-    midnightMode
-  ])
+  const hasSingleComma = (string) => {
+    return string.split(',').length - 1 == 1
+  }
+
+  if (!hasSingleComma(cityCountry)) {
+    window.api.send('invalidWarning', [cityCountry])
+  }
+  else {
+    window.api.send('apply-settings', [
+      cityCountry,
+      method,
+      fajrAngle,
+      ishaAngle,
+      checkImsak,
+      checkSunrise,
+      checkMidnight,
+      tuneImsak,
+      tuneFajr,
+      tuneSunrise,
+      tuneDhuhr,
+      tuneAsr,
+      tuneMaghrib,
+      tuneIsha,
+      tuneMidnight,
+      midnightMode
+    ])
+  }
 })
 
 // Update Data.
