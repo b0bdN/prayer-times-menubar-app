@@ -22,9 +22,9 @@ const mb = menubar({
 // console.log(app.getPath('userData'))
 
 // openDevTools.
-mb.on('after-create-window', () => {
-  mb.window.openDevTools()
-})
+// mb.on('after-create-window', () => {
+//   mb.window.openDevTools()
+// })
 
 // To avoid flash when opening the menubar app.
 mb.app.commandLine.appendSwitch('disable-backgrounding-occluded-windows', 'true')
@@ -393,8 +393,12 @@ mb.on('ready', async () => {
 
   // City, Country input validation
   ipcMain.on('invalidWarning', async (e, args) => {
-    dialog.showErrorBox(`Invalid City and Country: "${args[0]}"`, 'Please seperate the city and country inputs with a single comma.')
+    dialog.showErrorBox(
+      i18next.t('cityError.title', { input: args[0] }),
+      i18next.t('cityError.message')
+    )
   })
+
   // Close the app - button.
   ipcMain.on('close-app', () => {
     console.log('Close button clicked.')

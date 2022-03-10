@@ -70,5 +70,9 @@
   "noInternet" : {
     "title": "No internet connection",
     "message": "Check your internet connection and try again."
+  },
+  "cityError": {
+    "title": "Invalid City and Country: {{input}}",
+    "message": "Please seperate the city and country inputs with a single comma."
   }
 }

@@ -70,5 +70,9 @@
   "noInternet": {
     "title": "noInternet.title",
     "message": "noInternet.message"
+  },
+  "cityError": {
+    "title": "cityError.title",
+    "message": "cityError.message"
   }
 }

@@ -70,5 +70,9 @@
   "noInternet" : {
     "title": "Pas de connexion internet",
     "message": "Vérifiez votre connexion internet et réessayez."
+  },
+  "cityError": {
+    "title": "Saisie incorrect : {{input}}",
+    "message": "Veuillez séparer la ville et le pays par une (1) virgule."
   }
 }
