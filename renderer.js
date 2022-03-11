@@ -87,9 +87,12 @@ const getNextPrayer = () => {
   const timeString = today.toTimeString().substr(0, 8) // HH:MM:SS
   const pNames = document.getElementsByClassName('p-name')
   const pTimes = document.getElementsByClassName('p-time')
+  const pPrayer = document.querySelectorAll('.p-name, iframe[data-i18n]')
 
   for (let i = 0; i < pTimes.length; i++) {
     const t = pTimes[i].innerHTML
+    const prayer = pPrayer[i].getAttribute('data-i18n').split('.')[1] // e.g. pPrayer = 'prayer.asr' => .split('.')[1] = 'asr'
+
     const today = new Date().toJSON().slice(0, 10).replace(/-/g, '/') // today = YYYY/MM/DD
 
     document.getElementsByClassName('row')[i].classList.remove('row-focus')
@@ -108,7 +111,7 @@ const getNextPrayer = () => {
       ])
 
       break
-    } else if (pNames[i].innerHTML === 'Midnight' && t >= '00:00' && t < '01:00') {
+    } else if (prayer === 'Midnight' && t >= '00:00' && t < '01:00') {
       const tomorrow = new Date()
       tomorrow.setDate(tomorrow.getDate() + 1)
       const tomorrowJSON = tomorrow.toJSON().slice(0, 10).replace(/-/g, '/')
@@ -125,16 +128,10 @@ const getNextPrayer = () => {
       ])
 
       break
-    } else if (timeString === (t + ':00')) {
-      console.log(`It's ${pNames[i].innerHTML} time!`)
-      // TODO: add sounds (https://www.electronjs.org/docs/latest/api/notification#playing-sounds)
-      const NOTIFICATION_TITLE = `It's time to pray ${pNames[i].innerHTML}`
-      const NOTIFICATION_BODY = '[29:45]' +
-        ' Recite, [O Muḥammad], what has been revealed to you of the Book and establish prayer.' +
-        ' Indeed, prayer prohibits immorality and wrongdoing, and the remembrance of Allah is greater.' +
-        ' And Allah knows that which you do.'
-
-      new Notification(NOTIFICATION_TITLE, { body: NOTIFICATION_BODY }).show()
+    } else if (timeString === (t + ':00') && prayer !== 'Imsak' && prayer !== 'Sunrise' && prayer !== 'Midnight') {
+      window.api.send('notification', [
+        pNames[i].innerHTML
+      ])
 
       break
     }
@@ -282,13 +279,12 @@ document.getElementById('apply-btn').addEventListener('click', () => {
   const midnightMode = document.querySelector('input[name="midnightMode"]:checked').value
 
   const hasSingleComma = (string) => {
-    return string.split(',').length - 1 == 1
+    return string.split(',').length - 1 === 1
   }
 
   if (!hasSingleComma(cityCountry)) {
     window.api.send('invalidWarning', [cityCountry])
-  }
-  else {
+  } else {
     window.api.send('apply-settings', [
       cityCountry,
       method,

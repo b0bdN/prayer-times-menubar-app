@@ -63,6 +63,15 @@
     "version": "prayer times version",
     "credits": "Crédits"
   },
+  "notification": {
+    "title": "C'est le moment de prier {{prayer}}",
+    "body": [
+      "[29:45] Récite ce qui t’est révélé du Livre et accomplis la prière (As-Salât).",
+      "En vérité la prière (As-Salât) préserve de la turpitude et du blâmable.",
+      "Et le rappel d’Allah est certes ce qu’il y a de plus grand.",
+      "Et Allah sait ce que vous faites."
+    ]
+  },
   "apiError": {
     "title": "Oups ! Quelque chose a mal tourné !",
     "message": "Il peut y avoir une erreur avec l'API de {{api}}.\n${{err}}"

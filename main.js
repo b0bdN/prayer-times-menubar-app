@@ -1,4 +1,4 @@
-const { app, dialog, globalShortcut, ipcMain, nativeTheme, net } = require('electron')
+const { app, dialog, globalShortcut, ipcMain, nativeTheme, net, Notification } = require('electron')
 const { menubar } = require('menubar')
 const path = require('path')
 const fetch = require('node-fetch')
@@ -144,6 +144,18 @@ mb.on('ready', async () => {
     mb.tray.setToolTip(`Next Prayer: ${args[0]} at ${args[1]}`)
   })
 
+  // Notifications.
+  mb.app.setAppUserModelId(process.execPath)
+
+  ipcMain.on('notification', (e, prayer) => {
+    // TODO: add sounds (https://www.electronjs.org/docs/latest/api/notification#playing-sounds)
+    const NOTIFICATION_TITLE = i18next.t('notification.title', { prayer: prayer })
+    const NOTIFICATION_BODY = i18next.t('notification.body', { joinArrays: ' ' })
+
+    new Notification({ title: NOTIFICATION_TITLE, body: NOTIFICATION_BODY }).show()
+  })
+
+  // Theme.
   function setNativeTheme (theme) {
     if (theme === 'system') {
       nativeTheme.themeSource = 'system'
@@ -387,9 +399,6 @@ mb.on('ready', async () => {
       ])
     }
   })
-
-  // Notifications
-  mb.app.setAppUserModelId(process.execPath)
 
   // City, Country input validation
   ipcMain.on('invalidWarning', async (e, args) => {
