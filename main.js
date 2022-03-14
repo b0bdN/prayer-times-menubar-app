@@ -6,6 +6,9 @@ const config = require('./config.js')
 const store = require('./store.js')
 const i18next = require('./i18next.config.js')
 
+
+exports.language = store.getLanguage() ? store.getLanguage() : app.getLocale().split('-')[0] ;
+
 const mb = menubar({
   browserWindow: {
     width: 280,
@@ -84,6 +87,9 @@ mb.on('ready', async () => {
     const language = store.getLanguage() ? store.getLanguage() : app.getLocale().split('-')[0]
     changeLanguage(language)
 
+
+    const locales = app.getLocale();
+    console.log("locales : ", locales)
     // Settings
     const cc = store.getCityCountry()
     const hijriDate = store.getHijriDate()
@@ -93,7 +99,7 @@ mb.on('ready', async () => {
     const checkMidnight = store.getCheckMidnight() ? store.getCheckMidnight() : false
     const tuneValues = store.getTunes() ? store.getTunes() : false
     const midnightMode = store.getMidnightMode() ? store.getMidnightMode() : '0' // 0 by default for Standard
-    const tableTimings = store.getTableTimings()
+    const tableTimings = store.getTableTimings(locales)
 
     mb.window.webContents.send('init-data', [
       app.getVersion(),
@@ -127,6 +133,7 @@ mb.on('ready', async () => {
   args[2]: all translatabe elem [data-i18n]
   */
   ipcMain.handle('language:toggle', (e, args) => {
+    console.log("on passe ici");
     store.setLanguage(args[0])
     changeLanguage(args[0])
 
@@ -248,7 +255,7 @@ mb.on('ready', async () => {
     // See Prayer Times API, month start at 1 and date at 0.
     const month = today.getMonth() + 1
     const date = today.getDate() - 1
-
+    
     mb.window.webContents.send('setNewTimingsTable', [
       store.getHijriDate(month, date),
       store.getTableTimings(month, date)
