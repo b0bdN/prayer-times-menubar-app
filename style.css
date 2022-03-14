@@ -60,6 +60,12 @@
     color: #889391;
   }
 
+  input[type="number"]::-webkit-inner-spin-button {
+    opacity: 0.2;
+    padding-left: 5px;
+    height: 30px;
+  }
+
   .geolocation {
     filter: invert(11%) sepia(16%) saturate(408%) hue-rotate(21deg) brightness(97%) contrast(100%);
   }
@@ -125,6 +131,12 @@
   #date-h,
   .help {
     color: #6f7977;
+  }
+
+  input[type="number"]::-webkit-inner-spin-button {
+    opacity: 1;
+    padding-left: 5px;
+    height: 30px;
   }
 
   .geolocation {
@@ -410,11 +422,7 @@ input[type="number"] {
   margin: 0px;
 }
 
-input[type="number"]::-webkit-inner-spin-button {
-  opacity: 1;
-  padding-left: 5px;
-  height: 30px;
-}
+
 
 .geolocation {
   background: url('./assets/ri-gps-line.svg') top no-repeat;
