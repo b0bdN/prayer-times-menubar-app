@@ -11,6 +11,11 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^16.0.9",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0",
     "i18next-parser": "^5.4.0",
     "standard": "^16.0.4"
   },
