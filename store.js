@@ -80,8 +80,8 @@ const getHijriDate = (newMonth, newDate) => {
 
 const getLocalTimes = (timeOpts, prayer, locales) => {
   const datePryer = new Date()
-  datePryer.setHours(prayer.split(':')[0])
-  datePryer.setMinutes(prayer.split(':')[1])
+  datePryer.setHours(parseInt(prayer.split(':')[0]), 10)
+  datePryer.setMinutes(parseInt(prayer.split(':')[1]), 10)
 
   return datePryer.toLocaleTimeString(locales, timeOpts)
 }
