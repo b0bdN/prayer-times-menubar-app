@@ -63,6 +63,14 @@
     "version": "prayer times version",
     "credits": "Credits"
   },
+  "notification": {
+    "title": "It's time to pray {{prayer}}",
+    "body": [
+      "[29:45] Recite, [O Muḥammad], what has been revealed to you of the Book and establish prayer.",
+      "Indeed, prayer prohibits immorality and wrongdoing, and the remembrance of Allah is greater.",
+      "And Allah knows that which you do."
+    ]
+  },
   "apiError": {
     "title": "Oops! Something went wrong!",
     "message": "There may be an error with {{api}} API.\n${{err}}"

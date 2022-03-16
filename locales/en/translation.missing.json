@@ -63,6 +63,10 @@
     "version": "footer.version",
     "credits": "footer.credits"
   },
+  "notification": {
+    "title": "notification.title",
+    "body": "notification.body"
+  },
   "apiError": {
     "title": "apiError.title",
     "message": "apiError.message"
