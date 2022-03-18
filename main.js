@@ -6,6 +6,8 @@ const config = require('./config.js')
 const store = require('./store.js')
 const i18next = require('./i18next.config.js')
 
+exports.language = store.getLanguage() ? store.getLanguage() : app.getLocale().split('-')[0]
+
 const mb = menubar({
   browserWindow: {
     width: 280,
@@ -84,6 +86,8 @@ mb.on('ready', async () => {
     const language = store.getLanguage() ? store.getLanguage() : app.getLocale().split('-')[0]
     changeLanguage(language)
 
+    const locales = app.getLocale()
+
     // Settings
     const cc = store.getCityCountry()
     const hijriDate = store.getHijriDate()
@@ -93,7 +97,7 @@ mb.on('ready', async () => {
     const checkMidnight = store.getCheckMidnight() ? store.getCheckMidnight() : false
     const tuneValues = store.getTunes() ? store.getTunes() : false
     const midnightMode = store.getMidnightMode() ? store.getMidnightMode() : '0' // 0 by default for Standard
-    const tableTimings = store.getTableTimings()
+    const tableTimings = store.getTableTimings(locales)
 
     mb.window.webContents.send('init-data', [
       app.getVersion(),

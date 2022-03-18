@@ -78,12 +78,17 @@ const getHijriDate = (newMonth, newDate) => {
   return hDay + ' ' + hMonth + ' ' + hYear
 }
 
+const getLocalTimes = (timeOpts, prayer, locales) => {
+  const datePryer = new Date()
+  datePryer.setHours(parseInt(prayer.split(':')[0]), 10)
+  datePryer.setMinutes(parseInt(prayer.split(':')[1]), 10)
+
+  return datePryer.toLocaleTimeString(locales, timeOpts)
+}
+
 // Get prayer timings.
 // TODO: update the time format to correspond with toLocaleTimeString().
-const getTableTimings = (newMonth, newDate) => {
-  if (newMonth && newDate) {
-    jsonPrm = `data.${newMonth}.${newDate}`
-  }
+const getTableTimings = (locales) => {
   const imsak = store.get('checkImsak') ? store.get(`${jsonPrm}.timings.Imsak`).split(' ')[0] : false
   const fajr = store.get(`${jsonPrm}.timings.Fajr`).split(' ')[0]
   const sunrise = store.get('checkSunrise') ? store.get(`${jsonPrm}.timings.Sunrise`).split(' ')[0] : false
@@ -109,8 +114,14 @@ const getTableTimings = (newMonth, newDate) => {
   tTime.push(dhuhr, asr, maghrib, isha)
   if (midnight) tTime.push(midnight)
 
+  const timeOpts = {
+    hour: '2-digit',
+    minute: '2-digit'
+  }
+
   let tTable = ''
   for (let i = 0; i < tTime.length; i++) {
+    tTime[i] = getLocalTimes(timeOpts, tTime[i], locales)
     tTable += `<div class="row"><div class="p-name column" data-i18n="prayer.${tName[i]}">${tName[i]}</div><div class="p-time column">${tTime[i]}</div></div>`
   }
 
