@@ -89,7 +89,7 @@ const getLocalTimes = (timeOpts, prayer, locales) => {
 // Get prayer timings.
 // TODO: update the time format to correspond with toLocaleTimeString().
 const getTableTimings = (locales) => {
-  const imsak = store.get('checkImsak') ? store.get(`${jsonPrm}.timings.Imsak`).split(' ') : false
+  const imsak = store.get('checkImsak') ? store.get(`${jsonPrm}.timings.Imsak`).split(' ')[0] : false
   const fajr = store.get(`${jsonPrm}.timings.Fajr`).split(' ')[0]
   const sunrise = store.get('checkSunrise') ? store.get(`${jsonPrm}.timings.Sunrise`).split(' ')[0] : false
   const dhuhr = store.get(`${jsonPrm}.timings.Dhuhr`).split(' ')[0]
