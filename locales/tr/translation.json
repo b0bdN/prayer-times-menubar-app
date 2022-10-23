@@ -1,0 +1,84 @@
+{
+  "geo": {
+    "city": "Şehir",
+    "ISO": "Şehir Kodunu Bul"
+  },
+  "calc": {
+    "title": "Hesaplama metodu",
+    "auto": "Otomatik bul",
+    "custom": "Özel",
+    "MWL": "Dünya İslam Birliği",
+    "ISNA": "Kuzey Amerika İslam Sosyetesi",
+    "EGAS": "Mısır Genel Araştırma Kurumu",
+    "UAQU": "Ümmü'l-Kurra Üniversitesi, Mekke",
+    "UIS": "İslamik Bilimler Üniversitesi, Karachi",
+    "IG": "Tahran Üniversitesi Jeofizik Enstitüsü",
+    "SIA": "Şii İthna-Ashari, Leva Enstitüsü, Kum",
+    "Gulf": "Körfez Bölgesi",
+    "Kuwait": "Kuveyt",
+    "Quatar": "Katar",
+    "MUIS": "Singapur İslam Dini Konseyi, Singapur",
+    "UOIF": "Fransa İslam Örgütleri Birliği",
+    "DIB": "Diyanet İşleri Başkanlığı, Türkiye",
+    "SAMR": "Rusya Müslümanlarının Ruhani Yönetimi"
+  },
+  "adj": {
+    "title": "Manuel zaman ayarlamaları"
+  },
+  "prayer": {
+    "Imsak": "İmsak",
+    "Sunrise": "Şürûk",
+    "Midnight": "Gece yarısı",
+    "Fajr": "Sabah Namazı",
+    "Dhuhr": "Öğle",
+    "Asr": "İkindi",
+    "Maghrib": "Akşam",
+    "Isha": "Yatsı"
+  },
+  "angles": {
+    "title": "Özel açılar",
+    "fajr": "Sabah açısı (°)",
+    "isha": "Yatsı açısı (°)"
+  },
+  "add": {
+    "title": "Show additional times"
+  },
+  "midnight": {
+    "title": "Gece yarısı Modu",
+    "SuToSu": "Gün Batımından Gün Doğumuna",
+    "SuToFa": "Gün Batımından Sabah Namazına"
+  },
+  "theme": {
+    "title": "Tema",
+    "system": "Sistem",
+    "dark": "Koyu",
+    "light": "Açık"
+  },
+  "language": "Dil",
+  "btn": {
+    "apply": "Uygula",
+    "quit": "Çık"
+  },
+  "footer": {
+    "version": "namaz vakitleri versiyonu",
+    "credits": "Credits"
+  },
+  "notification": {
+    "title": "Namaz vakti {{prayer}}",
+    "body": [
+      "Ankebût Suresi 45.Ayet, [Ey Muhammed!], Kitaptan sana vahyedilenleri oku, namazı özenle kıl. Kuşkusuz namaz hayâsızlıktan ve kötülükten meneder. Allah’ı anmak her şeyden önemlidir. Allah yaptıklarınızı bilir.."
+    ]
+  },
+  "apiError": {
+    "title": "Hata! Bir şeyler yanlış gitti!",
+    "message": "{{api}} API.\n${{err}} ile ilgili bir hata olabilir"
+  },
+  "noInternet" : {
+    "title": "İnternet bağlantısı yok",
+    "message": "İnternet bağlantınızı kontrol edin ve tekrar deneyin."
+  },
+  "cityError": {
+    "title": "Geçersiz Şehir ve Ülke: {{input}}",
+    "message": "Lütfen şehir ve ülke girişlerini tek virgülle ayırın."
+  }
+}
