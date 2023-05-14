@@ -1,180 +1,398 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="style.css">
-  <title>Prayer Times</title>
-</head>
-<body>
-  <div class="wrapper">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Prayer Times</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div id="main">
+                <div class="header">
+                    <div class="settings">
+                        <div id="nav-icon">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div id="clock" class="fs-medium"></div>
+                </div>
 
-    <div id="main">
-      <div class="header">
-        <div class="settings">
-          <div id="nav-icon">
-            <span></span>
-            <span></span>
-          </div>
+                <div class="content">
+                    <div class="next-prayer"></div>
+                    <div class="t-note fs-large"></div>
+                </div>
+
+                <img src="./assets/background.png" alt="" />
+            </div>
+
+            <div id="details" class="fs-large">
+                <div class="header">
+                    <div class="dates">
+                        <div id="date-g"></div>
+                        <div id="date-h"></div>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="t-table" id="timings-table"></div>
+                </div>
+            </div>
+
+            <div id="settings">
+                <div class="content hidden">
+                    <div class="grid">
+                        <div class="form-item">
+                            <label for="city" data-i18n="geo.city">City</label>
+                            <input
+                                type="text"
+                                name="city"
+                                value=""
+                                id="city"
+                                autofocus
+                            />
+                            <div class="geolocation"></div>
+                            <div class="help fs-medium">
+                                e.g.: Dubai, AE / Montreal, CA / Paris, FR
+                                <br /><a
+                                    href="https://www.iso.org/obp/ui/#search/code/"
+                                    target="_blank"
+                                    alt="ISO Contry Codes"
+                                    data-i18n="geo.ISO"
+                                    >Find Country codes</a
+                                >
+                            </div>
+                        </div>
+                        <div class="form-item">
+                            <label for="calculation" data-i18n="calc.title"
+                                >Calculation method</label
+                            >
+                            <select name="calculation" id="calculation">
+                                <option value="auto" data-i18n="calc.auto">
+                                    Auto detect
+                                </option>
+                                <option value="99" data-i18n="calc.custom">
+                                    Custom
+                                </option>
+                                <option value="1" data-i18n="calc.MWL">
+                                    Muslim World League
+                                </option>
+                                <option value="2" data-i18n="calc.ISNA">
+                                    Islamic Society of North America
+                                </option>
+                                <option value="3" data-i18n="calc.EGAS">
+                                    Egyptian General Authority of Survey
+                                </option>
+                                <option value="4" data-i18n="calc.UAQU">
+                                    Umm Al-Qura University, Makkah
+                                </option>
+                                <option value="5" data-i18n="calc.UIS">
+                                    University of Islamic Sciences, Karachi
+                                </option>
+                                <option value="6" data-i18n="calc.IG">
+                                    Institute of Geophysics, University of
+                                    Tehran
+                                </option>
+                                <option value="7" data-i18n="calc.SIA">
+                                    Shia Ithna-Ashari, Leva Institute, Qum
+                                </option>
+                                <option value="8" data-i18n="calc.Gulf">
+                                    Gulf Region
+                                </option>
+                                <option value="9" data-i18n="calc.Kuwait">
+                                    Kuwait
+                                </option>
+                                <option value="10" data-i18n="calc.Quatar">
+                                    Qatar
+                                </option>
+                                <option value="11" data-i18n="calc.MUIS">
+                                    Majlis Ugama Islam Singapura, Singapore
+                                </option>
+                                <option value="12" data-i18n="calc.UOIF">
+                                    Union des Organisations Islamiques de France
+                                </option>
+                                <option value="13" data-i18n="calc.DIB">
+                                    Diyanet İşleri Başkanlığı, Turkey
+                                </option>
+                                <option value="14" data-i18n="calc.SAMR">
+                                    Spiritual Administration of Muslims of
+                                    Russia
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-item">
+                            <label data-i18n="adj.title"
+                                >Manual times adjustments</label
+                            >
+                            <div class="number-input">
+                                <label for="tuneImsak" data-i18n="prayer.Imsak"
+                                    >Imsak</label
+                                >
+                                <input
+                                    type="number"
+                                    id="tuneImsak"
+                                    name="tune-imsak"
+                                    step="1"
+                                    value="0"
+                                />
+                            </div>
+                            <div class="number-input">
+                                <label for="tuneFajr" data-i18n="prayer.Fajr"
+                                    >Fajr</label
+                                >
+                                <input
+                                    type="number"
+                                    id="tuneFajr"
+                                    name="tune-fajr"
+                                    step="1"
+                                    value="0"
+                                />
+                            </div>
+                            <div class="number-input">
+                                <label
+                                    for="tuneSunrise"
+                                    data-i18n="prayer.Sunrise"
+                                    >Sunrise</label
+                                >
+                                <input
+                                    type="number"
+                                    id="tuneSunrise"
+                                    name="tune-sunrise"
+                                    step="1"
+                                    value="0"
+                                />
+                            </div>
+                            <div class="number-input">
+                                <label for="tuneDhuhr" data-i18n="prayer.Dhuhr"
+                                    >Dhuhr</label
+                                >
+                                <input
+                                    type="number"
+                                    id="tuneDhuhr"
+                                    name="tune-dhuhr"
+                                    step="1"
+                                    value="0"
+                                />
+                            </div>
+                            <div class="number-input">
+                                <label for="tuneAsr" data-i18n="prayer.Asr"
+                                    >Asr</label
+                                >
+                                <input
+                                    type="number"
+                                    id="tuneAsr"
+                                    name="tune-asr"
+                                    step="1"
+                                    value="0"
+                                />
+                            </div>
+                            <div class="number-input">
+                                <label
+                                    for="tuneMaghrib"
+                                    data-i18n="prayer.Maghrib"
+                                    >Maghrib</label
+                                >
+                                <input
+                                    type="number"
+                                    id="tuneMaghrib"
+                                    name="tune-maghrib"
+                                    step="1"
+                                    value="0"
+                                />
+                            </div>
+                            <div class="number-input">
+                                <label for="tuneIsha" data-i18n="prayer.Isha"
+                                    >Isha</label
+                                >
+                                <input
+                                    type="number"
+                                    id="tuneIsha"
+                                    name="tune-isha"
+                                    step="1"
+                                    value="0"
+                                />
+                            </div>
+                            <div class="number-input">
+                                <label
+                                    for="tuneMidnight"
+                                    data-i18n="prayer.Midnight"
+                                    >Midnight</label
+                                >
+                                <input
+                                    type="number"
+                                    id="tuneMidnight"
+                                    name="tune-midnight"
+                                    step="1"
+                                    value="0"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-item" id="custom-angle">
+                            <label data-i18n="angles.title"
+                                >Custom angles</label
+                            >
+                            <div>
+                                <div class="angle">
+                                    <label
+                                        for="fajr-angle"
+                                        data-i18n="angles.fajr"
+                                        >Fajr angle (°)</label
+                                    >
+                                    <input
+                                        type="number"
+                                        name="fajr-angle"
+                                        id="fajr-angle"
+                                        value="18.0"
+                                        step="0.1"
+                                    />
+                                </div>
+                                <div class="angle">
+                                    <label
+                                        for="isha-angle"
+                                        data-i18n="angles.isha"
+                                        >Isha angle (°)</label
+                                    >
+                                    <input
+                                        type="number"
+                                        name="isha-angle"
+                                        id="isha-angle"
+                                        value="18.0"
+                                        step="0.1"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-item">
+                            <label data-i18n="add.title"
+                                >Show additional times</label
+                            >
+                            <div class="grid-check">
+                                <input
+                                    type="checkbox"
+                                    name="checkImsak"
+                                    id="checkImsak"
+                                />
+                                <label for="checkImsak" data-i18n="prayer.Imsak"
+                                    >Imsak</label
+                                >
+                                <input
+                                    type="checkbox"
+                                    name="checkSunrise"
+                                    id="checkSunrise"
+                                />
+                                <label
+                                    for="checkSunrise"
+                                    data-i18n="prayer.Sunrise"
+                                    >Sunrise</label
+                                >
+                                <input
+                                    type="checkbox"
+                                    name="checkMidnight"
+                                    id="checkMidnight"
+                                />
+                                <label
+                                    for="checkMidnight"
+                                    data-i18n="prayer.Midnight"
+                                    >Midnight</label
+                                >
+                            </div>
+                        </div>
+                        <div class="form-item">
+                            <label data-i18n="midnight.title"
+                                >Midnight mode</label
+                            >
+                            <div class="grid-check">
+                                <input
+                                    type="radio"
+                                    id="midnightStd"
+                                    name="midnightMode"
+                                    value="0"
+                                />
+                                <label
+                                    for="midnightStd"
+                                    data-i18n="midnight.SuToSu"
+                                    >Mid Sunset to Sunrise</label
+                                >
+                                <input
+                                    type="radio"
+                                    id="midnightJafari"
+                                    name="midnightMode"
+                                    value="1"
+                                />
+                                <label
+                                    for="midnightJafari"
+                                    data-i18n="midnight.SuToFa"
+                                    >Mid Sunset to Fajr</label
+                                >
+                            </div>
+                        </div>
+                        <div class="form-item">
+                            <label for="theme" data-i18n="theme.title"
+                                >Theme</label
+                            >
+                            <select name="theme" id="theme">
+                                <option value="system" data-i18n="theme.system">
+                                    System
+                                </option>
+                                <option value="dark" data-i18n="theme.dark">
+                                    Dark
+                                </option>
+                                <option value="light" data-i18n="theme.light">
+                                    Light
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-item">
+                            <label for="language" data-i18n="language"
+                                >Language</label
+                            >
+                            <select name="language" id="language">
+                                <option value="en">English</option>
+                                <option value="fr">Français</option>
+                                <option value="bn">বাংলা</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <button
+                            id="apply-btn"
+                            style="float: left"
+                            data-i18n="btn.apply"
+                        >
+                            Apply
+                        </button>
+                        <button
+                            id="close-btn"
+                            style="float: right"
+                            data-i18n="btn.quit"
+                        >
+                            Quit
+                        </button>
+                    </div>
+                    <div class="footer fs-medium">
+                        <img src="./assets/icon.png" alt="logo" />
+                        <div class="footer-text">
+                            <a
+                                href="https://github.com/b0bdN/prayer-times-menubar-app"
+                                target="_blank"
+                                data-i18n="footer.version"
+                                >prayer times version</a
+                            >
+                            <span id="version"></span>
+                            -
+                            <a
+                                href="https://github.com/b0bdN/prayer-times-menubar-app#credit--dependencies"
+                                target="_blank"
+                                data-i18n="footer.credits"
+                                >Credits</a
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="clock" class="fs-medium"></div>
-      </div>
 
-      <div class="content">
-        <div class="next-prayer"></div>
-        <div class="t-note fs-large"></div>
-      </div>
-
-      <img src="./assets/background.png" alt="">
-    </div>
-
-    <div id="details" class="fs-large">
-      <div class="header">
-        <div class="dates">
-          <div id="date-g"></div>
-          <div id="date-h"></div>
-        </div>
-      </div>
-      <div class="content">
-        <div class="t-table" id="timings-table"></div>
-      </div>
-    </div>
-
-    <div id="settings">
-      <div class="content hidden">
-        <div class="grid">
-          <div class="form-item">
-            <label for="city" data-i18n="geo.city">City</label>
-            <input type="text" name="city" value="" id="city" autofocus>
-            <div class="geolocation"></div>
-            <div class="help fs-medium">
-              e.g.: Dubai, AE / Montreal, CA / Paris, FR
-              <br><a href="https://www.iso.org/obp/ui/#search/code/" target="_blank" alt="ISO Contry Codes" data-i18n="geo.ISO">Find Country codes</a>
-            </div>
-          </div>
-          <div class="form-item">
-            <label for="calculation" data-i18n="calc.title">Calculation method</label>
-            <select name="calculation" id="calculation">
-              <option value="auto" data-i18n="calc.auto">Auto detect</option>
-              <option value="99" data-i18n="calc.custom">Custom</option>
-              <option value="1" data-i18n="calc.MWL">Muslim World League</option>
-              <option value="2" data-i18n="calc.ISNA">Islamic Society of North America</option>
-              <option value="3" data-i18n="calc.EGAS">Egyptian General Authority of Survey</option>
-              <option value="4" data-i18n="calc.UAQU">Umm Al-Qura University, Makkah</option>
-              <option value="5" data-i18n="calc.UIS">University of Islamic Sciences, Karachi</option>
-              <option value="6" data-i18n="calc.IG">Institute of Geophysics, University of Tehran</option>
-              <option value="7" data-i18n="calc.SIA">Shia Ithna-Ashari, Leva Institute, Qum</option>
-              <option value="8" data-i18n="calc.Gulf">Gulf Region</option>
-              <option value="9" data-i18n="calc.Kuwait">Kuwait</option>
-              <option value="10" data-i18n="calc.Quatar">Qatar</option>
-              <option value="11" data-i18n="calc.MUIS">Majlis Ugama Islam Singapura, Singapore</option>
-              <option value="12" data-i18n="calc.UOIF">Union des Organisations Islamiques de France</option>
-              <option value="13" data-i18n="calc.DIB">Diyanet İşleri Başkanlığı, Turkey</option>
-              <option value="14" data-i18n="calc.SAMR">Spiritual Administration of Muslims of Russia</option>
-            </select>
-          </div>
-          <div class="form-item">
-            <label data-i18n="adj.title">Manual times adjustments</label>
-            <div class="number-input">
-              <label for="tuneImsak" data-i18n="prayer.Imsak">Imsak</label>
-              <input type="number" id="tuneImsak" name="tune-imsak" step="1" value="0">
-            </div>
-            <div class="number-input">
-              <label for="tuneFajr" data-i18n="prayer.Fajr">Fajr</label>
-              <input type="number" id="tuneFajr" name="tune-fajr" step="1" value="0">
-            </div>
-            <div class="number-input">
-              <label for="tuneSunrise" data-i18n="prayer.Sunrise">Sunrise</label>
-              <input type="number" id="tuneSunrise" name="tune-sunrise" step="1" value="0">
-            </div>
-            <div class="number-input">
-              <label for="tuneDhuhr" data-i18n="prayer.Dhuhr">Dhuhr</label>
-              <input type="number" id="tuneDhuhr" name="tune-dhuhr" step="1" value="0">
-            </div>
-            <div class="number-input">
-              <label for="tuneAsr" data-i18n="prayer.Asr">Asr</label>
-              <input type="number" id="tuneAsr" name="tune-asr" step="1" value="0">
-            </div>
-            <div class="number-input">
-              <label for="tuneMaghrib" data-i18n="prayer.Maghrib">Maghrib</label>
-              <input type="number" id="tuneMaghrib" name="tune-maghrib" step="1" value="0">
-            </div>
-            <div class="number-input">
-              <label for="tuneIsha" data-i18n="prayer.Isha">Isha</label>
-              <input type="number" id="tuneIsha" name="tune-isha" step="1" value="0">
-            </div>
-            <div class="number-input">
-              <label for="tuneMidnight" data-i18n="prayer.Midnight">Midnight</label>
-              <input type="number" id="tuneMidnight" name="tune-midnight" step="1" value="0">
-            </div>
-          </div>
-          <div class="form-item" id="custom-angle">
-            <label data-i18n="angles.title">Custom angles</label>
-            <div>
-              <div class="angle">
-                <label for="fajr-angle" data-i18n="angles.fajr">Fajr angle (°)</label>
-                <input type="number" name="fajr-angle" id="fajr-angle" value="18.0" step="0.1">
-              </div>
-              <div class="angle">
-                <label for="isha-angle" data-i18n="angles.isha">Isha angle (°)</label>
-                <input type="number" name="isha-angle" id="isha-angle" value="18.0" step="0.1">
-              </div>
-            </div>
-          </div>
-          <div class="form-item">
-            <label data-i18n="add.title">Show additional times</label>
-            <div class="grid-check">
-              <input type="checkbox" name="checkImsak" id="checkImsak">
-              <label for="checkImsak" data-i18n="prayer.Imsak">Imsak</label>
-              <input type="checkbox" name="checkSunrise" id="checkSunrise">
-              <label for="checkSunrise" data-i18n="prayer.Sunrise">Sunrise</label>
-              <input type="checkbox" name="checkMidnight" id="checkMidnight">
-              <label for="checkMidnight" data-i18n="prayer.Midnight">Midnight</label>
-            </div>
-          </div>
-          <div class="form-item">
-            <label data-i18n="midnight.title">Midnight mode</label>
-            <div class="grid-check">
-              <input type="radio" id="midnightStd" name="midnightMode" value="0">
-              <label for="midnightStd" data-i18n="midnight.SuToSu">Mid Sunset to Sunrise</label>
-              <input type="radio" id="midnightJafari" name="midnightMode" value="1">
-              <label for="midnightJafari" data-i18n="midnight.SuToFa">Mid Sunset to Fajr</label>
-            </div>
-          </div>
-          <div class="form-item">
-            <label for="theme" data-i18n="theme.title">Theme</label>
-            <select name="theme" id="theme">
-              <option value="system" data-i18n="theme.system">System</option>
-              <option value="dark" data-i18n="theme.dark">Dark</option>
-              <option value="light" data-i18n="theme.light">Light</option>
-            </select>
-          </div>
-          <div class="form-item">
-            <label for="language" data-i18n="language">Language</label>
-            <select name="language" id="language">
-              <option value="en">English</option>
-              <option value="fr">Français</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-item">
-          <button id="apply-btn" style="float:left" data-i18n="btn.apply">Apply</button>
-          <button id="close-btn" style="float:right" data-i18n="btn.quit">Quit</button>
-        </div>
-        <div class="footer fs-medium">
-          <img src="./assets/icon.png" alt="logo">
-          <div class="footer-text">
-            <a href="https://github.com/b0bdN/prayer-times-menubar-app" target="_blank" data-i18n="footer.version">prayer times version</a> <span id="version"></span>
-            -
-            <a href="https://github.com/b0bdN/prayer-times-menubar-app#credit--dependencies" target="_blank" data-i18n="footer.credits">Credits</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <script src="./renderer.js"></script>
-</body>
+        <script src="./renderer.js"></script>
+    </body>
 </html>
