@@ -1,0 +1,86 @@
+{
+  "geo": {
+    "city": "Shahar",
+    "ISO": "Davlat codeni topish"
+  },
+  "calc": {
+    "title": "Hisoblash usuli",
+    "auto": "Auto aniqlash",
+    "custom": "Maxsus",
+    "MWL": "Musulmonlar Dunyo Ligasi",
+    "ISNA": "Shimoliy Amerika Islom jamiyati",
+    "EGAS": "Misr umumiy tadqiqot ma'muriyati",
+    "UAQU": "Umm al-Qura universiteti, Makka",
+    "UIS": "Islom fanlari universiteti, Karachi",
+    "IG": "Tehron universiteti Geofizika instituti",
+    "SIA": "Shia Ithna-Ashari, Leva instituti, Qum",
+    "Gulf": "Ko'rfaz mintaqasi",
+    "Kuwait": "Quvayt",
+    "Quatar": "Qatar",
+    "MUIS": "Singapur Islom diniy kengashi, Singapur",
+    "UOIF": "Frantsiya Islomiy Tashkilotlari Ittifoqi",
+    "DIB": "Din ishlari boʻyicha raislik, Turkiya",
+    "SAMR": "Rossiya musulmonlari diniy boshqarmasi"
+  },
+  "adj": {
+    "title": "Vaqtni qo'lda sozlash"
+  },
+  "prayer": {
+    "Imsak": "Imsak",
+    "Sunrise": "Shourouq",
+    "Midnight": "Yarim tun",
+    "Fajr": "Bomdod",
+    "Dhuhr": "Peshin",
+    "Asr": "Asr",
+    "Maghrib": "Shom",
+    "Isha": "Xufton"
+  },
+  "angles": {
+    "title": "Maxsus burchaklar",
+    "fajr": "Bomdod burchagi (°)",
+    "isha": "Xufton burchagi (°)"
+  },
+  "add": {
+    "title": "Qo'shimcha vaqtlarni ko'rsatish"
+  },
+  "midnight": {
+    "title": "Yarim tun rejimi",
+    "SuToSu": "Quyosh botishidan quyosh chiqishigacha",
+    "SuToFa": "Quyosh botishidan bomdodgacha"
+  },
+  "theme": {
+    "title": "Mavzu",
+    "system": "Tizim",
+    "dark": "Qorong'u",
+    "light": "Yorug'"
+  },
+  "language": "Til",
+  "btn": {
+    "apply": "Murojaat qilish",
+    "quit": "Chiqish"
+  },
+  "footer": {
+    "version": "namoz vaqtlari versiyasi",
+    "credits": "Kreditlar"
+  },
+  "notification": {
+    "title": "{{prayer}} o'qish vaqti keldi",
+    "body": [
+      "[29:45] (Ey Muhammad), kitobdan senga vahiy qilingan narsani tilovat qil va namozni to'kis ado et.",
+      "Darhaqiqat, namoz fahsh va yomon ishlardan qaytaradi va Allohni zikr qilish ulug‘roqdir.",
+      "Alloh nima qilayotganingizni biladir."
+    ]
+  },
+  "apiError": {
+    "title": "Voy! Nimadir noto'g'ri bajarildi!",
+    "message": "{{api}} API bilan xatolik yuz bergan bo'lishi mumkin.\n${{err}}"
+  },
+  "noInternet" : {
+    "title": "Internet aloqasi yo'q",
+    "message": "Internet aloqangizni tekshiring va qaytadan urining."
+  },
+  "cityError": {
+    "title": "Xato shahar va davlat: {{input}}",
+    "message": "Shahar va mamlakat maʼlumotlarini bitta vergul bilan ajrating."
+  }
+}
