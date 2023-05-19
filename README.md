@@ -71,9 +71,12 @@ Follow these steps to translate the app in you language:
 Note: the words between braces (e.g.:`{{api}}`) shouldn't be translated.
 
 Available translations:
+- اَلْعَرَبِيَّةُ (Arabic)
+- বাংলা (Bangla)
 - English
-- French
-- বাংলা
+- Français (French)
+- Türkçe (Turkish)
+- O'zbek (Uzbek)
 
 ## Credit | Dependencies
 
