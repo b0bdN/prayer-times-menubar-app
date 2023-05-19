@@ -73,6 +73,7 @@ Note: the words between braces (e.g.:`{{api}}`) shouldn't be translated.
 Available translations:
 - English
 - French
+- বাংলা
 
 ## Credit | Dependencies
 
