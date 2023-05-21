@@ -38,6 +38,9 @@ const getCheckMidnight = () => store.get('checkMidnight')
 const setCheckAdhan = (boolean) => store.set({ checkAdhan: boolean })
 const getCheckAdhan = () => store.get('checkAdhan')
 
+const setAdhanVoice = (voice) => store.set({ adhanVoice: voice })
+const getAdhanVoice = () => store.get('adhanVoice')
+
 const setTunes = (array) => {
   store.set({
     tunes: {
@@ -155,3 +158,5 @@ exports.setLanguage = setLanguage
 exports.getLanguage = getLanguage
 exports.setCheckAdhan = setCheckAdhan
 exports.getCheckAdhan = getCheckAdhan
+exports.setAdhanVoice = setAdhanVoice
+exports.getAdhanVoice = getAdhanVoice

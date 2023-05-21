@@ -476,10 +476,21 @@ button:hover {
   cursor: pointer;
 }
 
-.button__test {
-  margin-top: 2px;
-  margin-bottom: 2px;
+#adhan-play-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
 }
+
+#adhan-select {
+  flex: 5;
+}
+
+.button__test {
+  flex: 1;
+}
+
 
 .footer {
   align-items: center;

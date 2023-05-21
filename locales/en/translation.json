@@ -40,7 +40,10 @@
     "enable": "Enable Adhan",
     "voice": "Adhan Voice",
     "options": {
-      "v1": "Default"
+      "haram": "Masjid Al-Haram",
+      "mishari": "Mishari Rashid Al-Afasy",
+      "zahrani": "Salah Mansoor Az-Zahrani",
+      "mustafa": "Hafiz Mustafa Özcan"
     }
   },
   "angles": {

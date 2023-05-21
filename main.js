@@ -1,5 +1,6 @@
-const { app, dialog, globalShortcut, ipcMain, nativeTheme, net, Notification } = require('electron')
+const { app, dialog, globalShortcut, ipcMain, nativeTheme, net, Notification} = require('electron')
 const { menubar } = require('menubar')
+const adhans = require('./adhans.js')
 const path = require('path')
 const fetch = require('node-fetch')
 const config = require('./config.js')
@@ -97,6 +98,7 @@ mb.on('ready', async () => {
     const midnightMode = store.getMidnightMode() ? store.getMidnightMode() : '0' // 0 by default for Standard
     const tableTimings = store.getTableTimings()
     const checkAdhan = store.getCheckAdhan() ? store.getCheckAdhan() : false
+    const adhanVoice = store.getAdhanVoice() ? store.getAdhanVoice() : 0
 
     mb.window.webContents.send('init-data', [
       app.getVersion(),
@@ -111,7 +113,8 @@ mb.on('ready', async () => {
       checkMidnight,
       tuneValues,
       midnightMode,
-      checkAdhan
+      checkAdhan,
+      adhanVoice
     ])
   }
   await init()
@@ -154,17 +157,17 @@ mb.on('ready', async () => {
   ipcMain.on('notification', (e, prayer) => {
     // TODO: add sounds (https://www.electronjs.org/docs/latest/api/notification#playing-sounds)
 
-    // Triple equal doesn't work here.
-    if (prayer == 'test') {
-      if (audio === null) {
-        audio = player.play(path.join(__dirname, 'assets/adhans/a2.mp3'), function (err) {
-          if (err && !err.killed) throw err
-        })
-      } else {
-        audio.kill()
-        audio = null
+    if (prayer.length > 1) {
+      const [type, option] = prayer
+      if (type === 'test') {
+        if (audio === null) {
+          audio = playAdhan(option)
+        } else {
+          audio.kill()
+          audio = null
+        }
+        return
       }
-      return
     }
 
     const NOTIFICATION_TITLE = i18next.t('notification.title', { prayer: prayer })
@@ -173,13 +176,17 @@ mb.on('ready', async () => {
     new Notification({ title: NOTIFICATION_TITLE, body: NOTIFICATION_BODY, silent: store.getCheckAdhan() }).show()
 
     if (store.getCheckAdhan()) {
-      audio = player.play(path.join(__dirname, 'assets/adhans/a2.mp3'), function (err) {
-        if (err && !err.killed) throw err
-      })
+      audio = playAdhan(store.getAdhanVoice())
     } else {
       audio = null
     }
   })
+
+  function playAdhan (option) {
+    return player.play(adhans.adhanFiles[option].path, function (err) {
+      if (err && !err.killed) throw err
+    })
+  }
 
   // Theme.
   function setNativeTheme (theme) {
@@ -329,6 +336,7 @@ mb.on('ready', async () => {
     args[7 - 14]: tune Fajr, Sunrise, Dhuhr, Asr, Maghrib, Isha, Midnight
     args[15]: midnightMode
     args[16]: checkAdhan
+    args[17]: adhanVoice
     */
 
     // <input> city, country.
@@ -380,7 +388,10 @@ mb.on('ready', async () => {
     }
 
     const checkAdhan = args[16]
-    checkAdhan !== store.getCheckAdhan && store.setCheckAdhan(checkAdhan)
+    checkAdhan !== store.getCheckAdhan() && store.setCheckAdhan(checkAdhan)
+
+    const adhanVoice = args[17]
+    adhanVoice !== store.getAdhanVoice() && store.setAdhanVoice(adhanVoice)
 
     // Custom times adjustments (tunes)
     const tunes = {
@@ -426,7 +437,8 @@ mb.on('ready', async () => {
         store.getCheckImsak(),
         store.getCheckSunrise(),
         store.getCheckMidnight(),
-        store.getCheckAdhan()
+        store.getCheckAdhan(),
+        store.getAdhanVoice()
       ])
     }
   })

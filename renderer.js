@@ -11,6 +11,7 @@
  args[10]: tunes
  args[11]: midnightMode
  args[12]: checkbox adhan enable
+ args[13]: adhan voice
 */
 window.api.receive('init-data', (args) => {
   // Settings
@@ -44,6 +45,8 @@ window.api.receive('init-data', (args) => {
   }
 
   document.getElementById('checkAdhan').checked = args[12]
+
+  document.getElementById('adhan-select').value = args[13]
 
   // Language (i18n) - onload
   function loadTranslations () {
@@ -178,7 +181,10 @@ document.getElementById('nav-icon').addEventListener('click', () => {
 
 //  Play adhan on click.
 document.getElementById('start-test-adhan').addEventListener('click', () => {
-  window.api.send('notification', ['test'])
+  const option = document.getElementById('adhan-select').value
+  const btn = document.getElementById('start-test-adhan')
+  btn.textContent === '▶️' ? btn.textContent = '⏹️' : btn.textContent = '▶️'
+  window.api.send('notification', ['test', option])
 })
 
 // Theme
@@ -286,6 +292,7 @@ document.getElementById('apply-btn').addEventListener('click', () => {
   const tuneMidnight = document.getElementById('tuneMidnight').value
   const midnightMode = document.querySelector('input[name="midnightMode"]:checked').value
   const checkAdhan = document.getElementById('checkAdhan').checked
+  const adhanVoice = document.getElementById('adhan-select').value
 
   const hasSingleComma = (string) => {
     return string.split(',').length - 1 === 1
@@ -311,7 +318,8 @@ document.getElementById('apply-btn').addEventListener('click', () => {
       tuneIsha,
       tuneMidnight,
       midnightMode,
-      checkAdhan
+      checkAdhan,
+      adhanVoice
     ])
   }
 })
@@ -330,6 +338,7 @@ window.api.receive('update-data', (data) => {
   document.getElementById('checkSunrise').checked = data[3]
   document.getElementById('checkMidnight').checked = data[4]
   document.getElementById('checkAdhan').checked = data[5]
+  document.getElementById('adhan-select').value = data[6]
   toggleSettings()
   window.api.send('settings')
 })
