@@ -476,6 +476,11 @@ button:hover {
   cursor: pointer;
 }
 
+.button__test {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
 .footer {
   align-items: center;
   display: flex;

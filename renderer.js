@@ -176,9 +176,9 @@ document.getElementById('nav-icon').addEventListener('click', () => {
   window.api.send('settings')
 })
 
-// Play adhan on click.
-document.getElementById('myButton').addEventListener('click', () => {
-  window.api.send('notification', ['Test adhan'])
+//  Play adhan on click.
+document.getElementById('start-test-adhan').addEventListener('click', () => {
+  window.api.send('notification', ['test'])
 })
 
 // Theme

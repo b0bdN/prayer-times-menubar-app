@@ -153,18 +153,31 @@ mb.on('ready', async () => {
 
   ipcMain.on('notification', (e, prayer) => {
     // TODO: add sounds (https://www.electronjs.org/docs/latest/api/notification#playing-sounds)
+
+    // Triple equal doesn't work here.
+    if (prayer == 'test') {
+      if (audio === null) {
+        audio = player.play(path.join(__dirname, 'assets/adhans/a2.mp3'), function (err) {
+          if (err && !err.killed) throw err
+        })
+      } else {
+        audio.kill()
+        audio = null
+      }
+      return
+    }
+
     const NOTIFICATION_TITLE = i18next.t('notification.title', { prayer: prayer })
     const NOTIFICATION_BODY = i18next.t('notification.body', { joinArrays: ' ' })
 
-    new Notification({ title: NOTIFICATION_TITLE, body: NOTIFICATION_BODY, silent: !store.getCheckAdhan() }).show()
+    new Notification({ title: NOTIFICATION_TITLE, body: NOTIFICATION_BODY, silent: store.getCheckAdhan() }).show()
 
     if (store.getCheckAdhan()) {
-      console.log('Adhan sound is enabled.')
       audio = player.play(path.join(__dirname, 'assets/adhans/a2.mp3'), function (err) {
         if (err && !err.killed) throw err
       })
     } else {
-      console.log('Adhan sound is disabled.')
+      audio = null
     }
   })
 
