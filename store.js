@@ -35,6 +35,9 @@ const getCheckImsak = () => store.get('checkImsak')
 const getCheckSunrise = () => store.get('checkSunrise')
 const getCheckMidnight = () => store.get('checkMidnight')
 
+const setCheckAdhan = (boolean) => store.set({ checkAdhan: boolean })
+const getCheckAdhan = () => store.get('checkAdhan')
+
 const setTunes = (array) => {
   store.set({
     tunes: {
@@ -150,3 +153,5 @@ exports.setTheme = setTheme
 exports.getTheme = getTheme
 exports.setLanguage = setLanguage
 exports.getLanguage = getLanguage
+exports.setCheckAdhan = setCheckAdhan
+exports.getCheckAdhan = getCheckAdhan

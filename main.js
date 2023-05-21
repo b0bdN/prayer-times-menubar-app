@@ -5,6 +5,8 @@ const fetch = require('node-fetch')
 const config = require('./config.js')
 const store = require('./store.js')
 const i18next = require('./i18next.config.js')
+const player = require('play-sound')(opts = {})
+let audio = null
 
 const mb = menubar({
   browserWindow: {
@@ -94,6 +96,7 @@ mb.on('ready', async () => {
     const tuneValues = store.getTunes() ? store.getTunes() : false
     const midnightMode = store.getMidnightMode() ? store.getMidnightMode() : '0' // 0 by default for Standard
     const tableTimings = store.getTableTimings()
+    const checkAdhan = store.getCheckAdhan() ? store.getCheckAdhan() : false
 
     mb.window.webContents.send('init-data', [
       app.getVersion(),
@@ -107,7 +110,8 @@ mb.on('ready', async () => {
       checkSunrise,
       checkMidnight,
       tuneValues,
-      midnightMode
+      midnightMode,
+      checkAdhan
     ])
   }
   await init()
@@ -152,7 +156,16 @@ mb.on('ready', async () => {
     const NOTIFICATION_TITLE = i18next.t('notification.title', { prayer: prayer })
     const NOTIFICATION_BODY = i18next.t('notification.body', { joinArrays: ' ' })
 
-    new Notification({ title: NOTIFICATION_TITLE, body: NOTIFICATION_BODY }).show()
+    new Notification({ title: NOTIFICATION_TITLE, body: NOTIFICATION_BODY, silent: !store.getCheckAdhan() }).show()
+
+    if (store.getCheckAdhan()) {
+      console.log('Adhan sound is enabled.')
+      audio = player.play(path.join(__dirname, 'assets/adhans/a2.mp3'), function (err) {
+        if (err && !err.killed) throw err
+      })
+    } else {
+      console.log('Adhan sound is disabled.')
+    }
   })
 
   // Theme.
@@ -302,6 +315,7 @@ mb.on('ready', async () => {
     args[4 - 6]: checkImsak, checkSunrise, checkMidnight (true/false)
     args[7 - 14]: tune Fajr, Sunrise, Dhuhr, Asr, Maghrib, Isha, Midnight
     args[15]: midnightMode
+    args[16]: checkAdhan
     */
 
     // <input> city, country.
@@ -333,7 +347,7 @@ mb.on('ready', async () => {
     }
 
     let check = false
-    // Checkboxes show/hide imsak, sunrise, midnight.
+    // Checkboxes show/hide imsak, sunrise, midnight, enable/disable adhan
     const checkImsak = args[4]
     if (checkImsak !== store.getCheckImsak) {
       check = true
@@ -351,6 +365,9 @@ mb.on('ready', async () => {
       check = true
       store.setCheckMidnight(checkMidnight)
     }
+
+    const checkAdhan = args[16]
+    checkAdhan !== store.getCheckAdhan && store.setCheckAdhan(checkAdhan)
 
     // Custom times adjustments (tunes)
     const tunes = {
@@ -395,7 +412,8 @@ mb.on('ready', async () => {
         store.getTableTimings(),
         store.getCheckImsak(),
         store.getCheckSunrise(),
-        store.getCheckMidnight()
+        store.getCheckMidnight(),
+        store.getCheckAdhan()
       ])
     }
   })
@@ -411,12 +429,14 @@ mb.on('ready', async () => {
   // Close the app - button.
   ipcMain.on('close-app', () => {
     console.log('Close button clicked.')
+    audio !== null && audio.kill()
     app.quit()
   })
 })
 
 mb.app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
+    audio !== null && audio.kill()
     app.quit()
   }
 })

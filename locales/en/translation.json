@@ -35,6 +35,14 @@
     "Maghrib": "Maghrib",
     "Isha": "Isha"
   },
+  "adhan": {
+    "title": "Adhan",
+    "enable": "Enable Adhan",
+    "voice": "Adhan Voice",
+    "options": {
+      "v1": "Default"
+    }
+  },
   "angles": {
     "title": "Custom angles",
     "fajr": "Fajr angle (°)",

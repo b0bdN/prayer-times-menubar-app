@@ -24,6 +24,7 @@
       <div class="content">
         <div class="next-prayer"></div>
         <div class="t-note fs-large"></div>
+        <button id="myButton">Play adhan test</button> 
       </div>
 
       <img src="./assets/background.png" alt="">
@@ -142,6 +143,19 @@
               <label for="midnightJafari" data-i18n="midnight.SuToFa">Mid Sunset to Fajr</label>
             </div>
           </div>
+
+          <div class="form-item">
+            <label data-i18n="adhan.title">Adhan</label>
+            <div class="grid-check">
+              <input type="checkbox" name="checkAdhan" id="checkAdhan">
+              <label for="checkAdhan" data-i18n="adhan.enable">Enable Adhan</label>
+            </div>
+            <label for="adhan-select" data-i18n="adhan.voice" >Adhan Voice</label>
+            <select name="adhan-select" id="adhan-select">
+              <option value="1" data-i18n="adhan.options.v1">Default</option>
+            </select>
+          </div>
+
           <div class="form-item">
             <label for="theme" data-i18n="theme.title">Theme</label>
             <select name="theme" id="theme">

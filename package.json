@@ -24,6 +24,7 @@
     "i18next": "^21.6.12",
     "i18next-fs-backend": "^1.1.4",
     "menubar": "^9.1.1",
-    "node-fetch": "^2.6.7"
+    "node-fetch": "^2.6.7",
+    "play-sound": "^1.1.5"
   }
 }
