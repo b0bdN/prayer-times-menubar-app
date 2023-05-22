@@ -142,6 +142,25 @@
               <label for="midnightJafari" data-i18n="midnight.SuToFa">Mid Sunset to Fajr</label>
             </div>
           </div>
+
+          <div class="form-item">
+            <label data-i18n="adhan.title">Adhan</label>
+            <div class="grid-check">
+              <input type="checkbox" name="checkAdhan" id="checkAdhan">
+              <label for="checkAdhan" data-i18n="adhan.enable">Enable Adhan</label>
+            </div>
+            <label for="adhan-select" data-i18n="adhan.voice" >Adhan Voice</label>
+            <div id="adhan-play-controls">
+              <select name="adhan-select" id="adhan-select">
+              <option value="0" data-i18n="adhan.options.haram">Masjid Al-Haram</option>
+              <option value="1" data-i18n="adhan.options.mishari">Mishari Rashid Al-Afasy</option>
+              <option value="2" data-i18n="adhan.options.zahrani">Salah Mansoor Az-Zahrani</option>
+              <option value="3" data-i18n="adhan.options.mustafa">Hafiz Mustafa Özcan</option>
+              </select>
+              <button id="start-test-adhan" class="button__test">▶️</button> 
+            </div>
+          </div>
+
           <div class="form-item">
             <label for="theme" data-i18n="theme.title">Theme</label>
             <select name="theme" id="theme">

@@ -10,6 +10,8 @@
  args[7 - 9]: checkbox imsak, sunrise, midnight
  args[10]: tunes
  args[11]: midnightMode
+ args[12]: checkbox adhan enable
+ args[13]: adhan voice
 */
 window.api.receive('init-data', (args) => {
   // Settings
@@ -41,6 +43,10 @@ window.api.receive('init-data', (args) => {
     document.getElementById('midnightStd').checked = false
     document.getElementById('midnightJafari').checked = true
   }
+
+  document.getElementById('checkAdhan').checked = args[12]
+
+  document.getElementById('adhan-select').value = args[13]
 
   // Language (i18n) - onload
   function loadTranslations () {
@@ -173,6 +179,14 @@ document.getElementById('nav-icon').addEventListener('click', () => {
   window.api.send('settings')
 })
 
+//  Play adhan on click.
+document.getElementById('start-test-adhan').addEventListener('click', () => {
+  const option = document.getElementById('adhan-select').value
+  const btn = document.getElementById('start-test-adhan')
+  btn.textContent === '▶️' ? btn.textContent = '⏹️' : btn.textContent = '▶️'
+  window.api.send('notification', ['test', option])
+})
+
 // Theme
 document.getElementById('theme').addEventListener('change', () => {
   const theme = document.getElementById('theme').value
@@ -277,6 +291,8 @@ document.getElementById('apply-btn').addEventListener('click', () => {
   const tuneIsha = document.getElementById('tuneIsha').value
   const tuneMidnight = document.getElementById('tuneMidnight').value
   const midnightMode = document.querySelector('input[name="midnightMode"]:checked').value
+  const checkAdhan = document.getElementById('checkAdhan').checked
+  const adhanVoice = document.getElementById('adhan-select').value
 
   const hasSingleComma = (string) => {
     return string.split(',').length - 1 === 1
@@ -301,7 +317,9 @@ document.getElementById('apply-btn').addEventListener('click', () => {
       tuneMaghrib,
       tuneIsha,
       tuneMidnight,
-      midnightMode
+      midnightMode,
+      checkAdhan,
+      adhanVoice
     ])
   }
 })
@@ -311,6 +329,7 @@ document.getElementById('apply-btn').addEventListener('click', () => {
   data[0]: hijri date
   data[1]: timings table
   data[2 - 4]: check Imsak, Sunrise, Midnight
+  data[5]: enable/disable adhan
 */
 window.api.receive('update-data', (data) => {
   document.getElementById('date-h').innerHTML = data[0]
@@ -318,6 +337,8 @@ window.api.receive('update-data', (data) => {
   document.getElementById('checkImsak').checked = data[2]
   document.getElementById('checkSunrise').checked = data[3]
   document.getElementById('checkMidnight').checked = data[4]
+  document.getElementById('checkAdhan').checked = data[5]
+  document.getElementById('adhan-select').value = data[6]
   toggleSettings()
   window.api.send('settings')
 })

@@ -35,6 +35,17 @@
     "Maghrib": "Maghrib",
     "Isha": "Isha"
   },
+  "adhan": {
+    "title": "Adhan",
+    "enable": "Enable Adhan",
+    "voice": "Adhan Voice",
+    "options": {
+      "haram": "Masjid Al-Haram",
+      "mishari": "Mishari Rashid Al-Afasy",
+      "zahrani": "Salah Mansoor Az-Zahrani",
+      "mustafa": "Hafiz Mustafa Özcan"
+    }
+  },
   "angles": {
     "title": "Custom angles",
     "fajr": "Fajr angle (°)",

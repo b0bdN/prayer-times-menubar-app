@@ -1,10 +1,13 @@
-const { app, dialog, globalShortcut, ipcMain, nativeTheme, net, Notification } = require('electron')
+const { app, dialog, globalShortcut, ipcMain, nativeTheme, net, Notification} = require('electron')
 const { menubar } = require('menubar')
+const adhans = require('./adhans.js')
 const path = require('path')
 const fetch = require('node-fetch')
 const config = require('./config.js')
 const store = require('./store.js')
 const i18next = require('./i18next.config.js')
+const player = require('play-sound')(opts = {})
+let audio = null
 
 const mb = menubar({
   browserWindow: {
@@ -94,6 +97,8 @@ mb.on('ready', async () => {
     const tuneValues = store.getTunes() ? store.getTunes() : false
     const midnightMode = store.getMidnightMode() ? store.getMidnightMode() : '0' // 0 by default for Standard
     const tableTimings = store.getTableTimings()
+    const checkAdhan = store.getCheckAdhan() ? store.getCheckAdhan() : false
+    const adhanVoice = store.getAdhanVoice() ? store.getAdhanVoice() : 0
 
     mb.window.webContents.send('init-data', [
       app.getVersion(),
@@ -107,7 +112,9 @@ mb.on('ready', async () => {
       checkSunrise,
       checkMidnight,
       tuneValues,
-      midnightMode
+      midnightMode,
+      checkAdhan,
+      adhanVoice
     ])
   }
   await init()
@@ -149,11 +156,37 @@ mb.on('ready', async () => {
 
   ipcMain.on('notification', (e, prayer) => {
     // TODO: add sounds (https://www.electronjs.org/docs/latest/api/notification#playing-sounds)
+
+    if (prayer.length > 1) {
+      const [type, option] = prayer
+      if (type === 'test') {
+        if (audio === null) {
+          audio = playAdhan(option)
+        } else {
+          audio.kill()
+          audio = null
+        }
+        return
+      }
+    }
+
     const NOTIFICATION_TITLE = i18next.t('notification.title', { prayer: prayer })
     const NOTIFICATION_BODY = i18next.t('notification.body', { joinArrays: ' ' })
 
-    new Notification({ title: NOTIFICATION_TITLE, body: NOTIFICATION_BODY }).show()
+    new Notification({ title: NOTIFICATION_TITLE, body: NOTIFICATION_BODY, silent: store.getCheckAdhan() }).show()
+
+    if (store.getCheckAdhan()) {
+      audio = playAdhan(store.getAdhanVoice())
+    } else {
+      audio = null
+    }
   })
+
+  function playAdhan (option) {
+    return player.play(adhans.adhanFiles[option].path, function (err) {
+      if (err && !err.killed) throw err
+    })
+  }
 
   // Theme.
   function setNativeTheme (theme) {
@@ -302,6 +335,8 @@ mb.on('ready', async () => {
     args[4 - 6]: checkImsak, checkSunrise, checkMidnight (true/false)
     args[7 - 14]: tune Fajr, Sunrise, Dhuhr, Asr, Maghrib, Isha, Midnight
     args[15]: midnightMode
+    args[16]: checkAdhan
+    args[17]: adhanVoice
     */
 
     // <input> city, country.
@@ -333,7 +368,7 @@ mb.on('ready', async () => {
     }
 
     let check = false
-    // Checkboxes show/hide imsak, sunrise, midnight.
+    // Checkboxes show/hide imsak, sunrise, midnight, enable/disable adhan
     const checkImsak = args[4]
     if (checkImsak !== store.getCheckImsak) {
       check = true
@@ -351,6 +386,12 @@ mb.on('ready', async () => {
       check = true
       store.setCheckMidnight(checkMidnight)
     }
+
+    const checkAdhan = args[16]
+    checkAdhan !== store.getCheckAdhan() && store.setCheckAdhan(checkAdhan)
+
+    const adhanVoice = args[17]
+    adhanVoice !== store.getAdhanVoice() && store.setAdhanVoice(adhanVoice)
 
     // Custom times adjustments (tunes)
     const tunes = {
@@ -395,7 +436,9 @@ mb.on('ready', async () => {
         store.getTableTimings(),
         store.getCheckImsak(),
         store.getCheckSunrise(),
-        store.getCheckMidnight()
+        store.getCheckMidnight(),
+        store.getCheckAdhan(),
+        store.getAdhanVoice()
       ])
     }
   })
@@ -411,12 +454,14 @@ mb.on('ready', async () => {
   // Close the app - button.
   ipcMain.on('close-app', () => {
     console.log('Close button clicked.')
+    audio !== null && audio.kill()
     app.quit()
   })
 })
 
 mb.app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
+    audio !== null && audio.kill()
     app.quit()
   }
 })
