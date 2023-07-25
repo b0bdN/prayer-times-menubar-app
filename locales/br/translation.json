@@ -1,0 +1,86 @@
+{
+  "geo": {
+    "city": "Cidade",
+    "ISO": "Encontre códigos de países"
+  },
+  "calc": {
+    "title": "Método de cálculo",
+    "auto": "Detecção automática",
+    "custom": "Personalizado",
+    "MWL": "Liga Mundial Muçulmana",
+    "ISNA": "Sociedade Islâmica da América do Norte",
+    "EGAS": "Autoridade Geral Egípcia de Levantamento",
+    "UAQU": "Universidade Umm Al-Qura, Meca",
+    "UIS": "Universidade de Ciências Islâmicas, Karachi",
+    "IG": "Instituto de Geofísica, Universidade de Teerã",
+    "SIA": "Shia Ithna-Ashari, Leva Institute, Qum",
+    "Gulf": "Região do Golfo",
+    "Kuwait": "Kuwait",
+    "Quatar": "Catar",
+    "MUIS": "Conselho Religioso Islâmico de Singapura, Singapura",
+    "UOIF": "União das Organizações Islâmicas da França",
+    "DIB": "Presidência de Assuntos Religiosos, Turquia",
+    "SAMR": "Administração Espiritual dos Muçulmanos da Rússia"
+  },
+  "adj": {
+    "title": "Ajustes manuais de horários"
+  },
+  "prayer": {
+    "Imsak": "Imsak",
+    "Sunrise": "Nascer do sol",
+    "Midnight": "Meia-noite",
+    "Fajr": "Fajr",
+    "Dhuhr": "Dhuhr",
+    "Asr": "Asr",
+    "Maghrib": "Maghrib",
+    "Isha": "Isha"
+  },
+  "angles": {
+    "title": "Ângulos personalizados",
+    "fajr": "Ângulo Fajr (°)",
+    "isha": "Ângulo Isha (°)"
+  },
+  "add": {
+    "title": "Mostrar horários adicionais"
+  },
+  "midnight": {
+    "title": "Modo meia-noite",
+    "SuToSu": "Meio do pôr do sol ao nascer do sol",
+    "SuToFa": "Meio do pôr do sol ao Fajr"
+  },
+  "theme": {
+    "title": "Tema",
+    "system": "Sistema",
+    "dark": "Escuro",
+    "light": "Claro"
+  },
+  "language": "Idioma",
+  "btn": {
+    "apply": "Aplicar",
+    "quit": "Sair"
+  },
+  "footer": {
+    "version": "versão dos horários de oração",
+    "credits": "Créditos"
+  },
+  "notification": {
+    "title": "É hora de orar {{prayer}}",
+    "body": [
+      "[29:45] Recite, [O Muhammad], o que foi revelado a você do Livro e estabeleça a oração.",
+      "De fato, a oração proíbe a imoralidade e a injustiça, e a lembrança de Allah é maior.",
+      "E Allah sabe o que você faz."
+    ]
+  },
+  "apiError": {
+    "title": "Ops! Algo deu errado!",
+    "message": "Pode haver um erro com a API {{api}}.\n${{err}}"
+  },
+  "noInternet": {
+    "title": "Sem conexão com a internet",
+    "message": "Verifique sua conexão com a internet e tente novamente."
+  },
+  "cityError": {
+    "title": "Cidade e país inválidos: {{input}}",
+    "message": "Por favor, separe os inputs de cidade e país com uma única vírgula."
+  }
+}
