@@ -79,43 +79,56 @@ const getHijriDate = (newMonth, newDate) => {
 }
 
 // Get prayer timings.
-// TODO: update the time format to correspond with toLocaleTimeString().
+// Transformed the times in the timings table in toLocaleTimeString()
 const getTableTimings = (newMonth, newDate) => {
   if (newMonth && newDate) {
-    jsonPrm = `data.${newMonth}.${newDate}`
+    jsonPrm = `data.${newMonth}.${newDate}`;
   }
-  const imsak = store.get('checkImsak') ? store.get(`${jsonPrm}.timings.Imsak`).split(' ')[0] : false
-  const fajr = store.get(`${jsonPrm}.timings.Fajr`).split(' ')[0]
-  const sunrise = store.get('checkSunrise') ? store.get(`${jsonPrm}.timings.Sunrise`).split(' ')[0] : false
-  const dhuhr = store.get(`${jsonPrm}.timings.Dhuhr`).split(' ')[0]
-  const asr = store.get(`${jsonPrm}.timings.Asr`).split(' ')[0]
-  const maghrib = store.get(`${jsonPrm}.timings.Maghrib`).split(' ')[0]
-  const isha = store.get(`${jsonPrm}.timings.Isha`).split(' ')[0]
-  const midnight = store.get('checkMidnight') ? store.get(`${jsonPrm}.timings.Midnight`).split(' ')[0] : false
 
-  const tName = []
-  // ['Imsak', 'Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha', 'Midnight']
-  if (imsak) tName.push('Imsak')
-  tName.push('Fajr')
-  if (sunrise) tName.push('Sunrise')
-  tName.push('Dhuhr', 'Asr', 'Maghrib', 'Isha')
-  if (midnight) tName.push('Midnight')
+  const imsak = store.get('checkImsak')
+    ? new Date(store.get(`${jsonPrm}.timings.Imsak`)).toLocaleTimeString().split(' ')[0]
+    : false;
 
-  const tTime = []
-  // [imsak, fajr, sunrise, dhuhr, asr, maghrib, isha, midnight]
-  if (imsak) tTime.push(imsak)
-  tTime.push(fajr)
-  if (sunrise) tTime.push(sunrise)
-  tTime.push(dhuhr, asr, maghrib, isha)
-  if (midnight) tTime.push(midnight)
+  const fajr = new Date(store.get(`${jsonPrm}.timings.Fajr`)).toLocaleTimeString().split(' ')[0];
+  
+  const sunrise = store.get('checkSunrise')
+    ? new Date(store.get(`${jsonPrm}.timings.Sunrise`)).toLocaleTimeString().split(' ')[0]
+    : false;
+  
+  const dhuhr = new Date(store.get(`${jsonPrm}.timings.Dhuhr`)).toLocaleTimeString().split(' ')[0];
+  const asr = new Date(store.get(`${jsonPrm}.timings.Asr`)).toLocaleTimeString().split(' ')[0];
+  const maghrib = new Date(store.get(`${jsonPrm}.timings.Maghrib`)).toLocaleTimeString().split(' ')[0];
+  const isha = new Date(store.get(`${jsonPrm}.timings.Isha`)).toLocaleTimeString().split(' ')[0];
 
-  let tTable = ''
+  const midnight = store.get('checkMidnight')
+    ? new Date(store.get(`${jsonPrm}.timings.Midnight`)).toLocaleTimeString().split(' ')[0]
+    : false;
+
+  const tName = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
+  const tTime = [fajr, dhuhr, asr, maghrib, isha];
+
+  if (imsak) {
+    tName.unshift('Imsak');
+    tTime.unshift(imsak);
+  }
+
+  if (sunrise) {
+    tName.splice(2, 0, 'Sunrise');
+    tTime.splice(2, 0, sunrise);
+  }
+
+  if (midnight) {
+    tName.push('Midnight');
+    tTime.push(midnight);
+  }
+
+  let tTable = '';
   for (let i = 0; i < tTime.length; i++) {
-    tTable += `<div class="row"><div class="p-name column" data-i18n="prayer.${tName[i]}">${tName[i]}</div><div class="p-time column">${tTime[i]}</div></div>`
+    tTable += `<div class="row"><div class="p-name column" data-i18n="prayer.${tName[i]}">${tName[i]}</div><div class="p-time column">${tTime[i]}</div></div>`;
   }
 
-  return tTable
-}
+  return tTable;
+};
 
 const setTheme = (theme) => store.set({ theme: theme })
 const getTheme = () => store.get('theme')
