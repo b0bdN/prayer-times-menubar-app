@@ -1,0 +1,86 @@
+{
+    "geo": {
+      "city": "Stadt",
+      "ISO": "ISO-Ländercodes suchen"
+    },
+    "calc": {
+      "title": "Berechnungsmethode",
+      "auto": "Automatisch erfassen",
+      "custom": "Benutzerdefiniert",
+      "MWL": "Islamische Weltliga",
+      "ISNA": "Islamische Gesellschaft Nordamerikas",
+      "EGAS": "Ägyptische Generalvermessungsbehörde",
+      "UAQU": "Umm Al-Qura Universität, Mekka",
+      "UIS": "Universität für Islamische Wissenschaften, Karachi",
+      "IG": "Institut für Geophysik, Universität von Teheran",
+      "SIA": "Shia Ithna-Ashari, Leva Institut, Qum",
+      "Gulf": "Golfregion",
+      "Kuwait": "Kuwait",
+      "Quatar": "Katar",
+      "MUIS": "Islamisch-Religiöser Rat von Singapur, Singapur",
+      "UOIF": "Union islamischer Organisationen in Frankreich",
+      "DIB": "Präsidium für religiöse Angelegenheiten, Türkei",
+      "SAMR": "Zentrale Geistliche Verwaltung der Muslime Russlands"
+    },
+    "adj": {
+      "title": "Benutzerdefinierte Zeitanpassung"
+    },
+    "prayer": {
+      "Imsak": "Imsak",
+      "Sunrise": "Sonnenaufgang",
+      "Midnight": "Mitternacht",
+      "Fajr": "Fadschr",
+      "Dhuhr": "Zuhr",
+      "Asr": "Asr",
+      "Maghrib": "Maghrib",
+      "Isha": "Ischa"
+    },
+    "angles": {
+      "title": "Benutzerdefinierter Winkel",
+      "fajr": "Fadschr Winkel (°)",
+      "isha": "Ischa Winkel (°)"
+    },
+    "add": {
+      "title": "Weitere Zeiten anzeigen"
+    },
+    "midnight": {
+      "title": "Mitternachtsmodus",
+      "SuToSu": "Mitte Sonnenuntergang bis Sonnenaufgang",
+      "SuToFa": "Mitte Sonnenuntergang bis Fadschr"
+    },
+    "theme": {
+      "title": "Erscheingungsbild",
+      "system": "System",
+      "dark": "Dunkel",
+      "light": "Hell"
+    },
+    "language": "Sprache",
+    "btn": {
+      "apply": "Anwenden",
+      "quit": "Verlassen"
+    },
+    "footer": {
+      "version": "Gebetszeiten Version",
+      "credits": "Mitwirkende"
+    },
+    "notification": {
+      "title": "Es ist Zeit zu beten {{prayer}}",
+      "body": [
+        "[29:45] Verlies, [Oh Mohammed], was dir vom Buch als Offenbarung eingegeben wird, und verrichte das Gebet.",
+        "Gewiß, das Gebet verbietet das Schändliche und Verwerfliche zu tun, und das Gedenken Allahs ist wahrlich größer.",
+        "Und Allah weiß, was ihr macht."
+      ]
+    },
+    "apiError": {
+      "title": "Huch! Etwas ist schief gelaufen!",
+      "message": "Möglicherweise liegt ein Fehler vor bei {{api}} API.\n${{err}}"
+    },
+    "noInternet" : {
+      "title": "Keine Internetverbindungn",
+      "message": "Überprüfen Sie Ihre Internetverbindung und versuchen Sie es anschließend erneut."
+    },
+    "cityError": {
+      "title": "Stadt und Land sind ungültig: {{input}}",
+      "message": "Bitte trennen Sie die Eingaben von Stadt und Land durch ein Komma."
+    }
+  }
