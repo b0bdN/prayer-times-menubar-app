@@ -21,16 +21,17 @@ You can enter your location in the settings panel, just enter: CITY, COUNTRY. <b
 You can use the full name of the country or just the alpha-2 code [ISO 3166](https://www.iso.org/obp/ui/#search/code/). <br>
 When using the geolocation button, a request is made to [IPinfo.io API](https://ipinfo.io/) to be able to get the city and country of you location. An internet connection is required.
 
-*This app use the Free plan from ipinfo.io, and can access up to 50k request/month.*
+_This app use the Free plan from ipinfo.io, and can access up to 50k request/month._
 
 #### Keyboard shortcut
 
 You can use the following shortcuts: <br>
-<kbd>Ctrl or Cmd</kbd> + <kbd>Alt</kbd> + <kbd>P</kbd>  Global shortcut to show/hide the app
+<kbd>Ctrl or Cmd</kbd> + <kbd>Alt</kbd> + <kbd>P</kbd> Global shortcut to show/hide the app
 
 ## Development
 
 - You will need a **TOKEN** from [IPinfo.io](https://ipinfo.io/).
+
 ```js
 // config.js
 
@@ -64,6 +65,7 @@ Contributions are welcome!
 ## Translations
 
 Follow these steps to translate the app in you language:
+
 1. Create a folder with the 2 letters of your language in `./locales/`
 2. Copy [this file](./locales/en/translation.json) (`./locales/en/translation.json`) in your folder
 3. Start translating! :)
@@ -71,8 +73,10 @@ Follow these steps to translate the app in you language:
 Note: the words between braces (e.g.:`{{api}}`) shouldn't be translated.
 
 Available translations:
+
 - اَلْعَرَبِيَّةُ (Arabic)
 - বাংলা (Bangla)
+- Deutsch (German)
 - English
 - Français (French)
 - Türkçe (Turkish)
@@ -91,7 +95,9 @@ Available translations:
 - Logo: Islam by Olena Panasovska from NounProject.com
 
 ## Donations
+
 Donations can be made via cryptocurrencies:
+
 - XMR: `88TyfPkBEh44NFwdy5wMtv5M1aJFgNpWq4S97oZhSPwcCr4ah8cWyCRe8qE1Q3n9sAirVF23u6FkMCdSGiJSyLhHN5UcjcL`
 - BTC: `bc1qthw8u4he9zj6ajnfqxq6z5ang6w24hdds8j68r`
 
