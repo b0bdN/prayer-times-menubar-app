@@ -1,0 +1,86 @@
+{
+    "geo": {
+      "city": "Città",
+      "ISO": "Trova il codice dello stato"
+    },
+    "calc": {
+      "title": "Metodo di calcolo",
+      "auto": "Calcolo automatico",
+      "custom": "Personalizzato",
+      "MWL": "Lega Mondiale Musulmana",
+      "ISNA": "Società Islamica del Nord America",
+      "EGAS": "Autorità Generale per la Ricerca Egiziana",
+      "UAQU": "Università Umm al-Qura, Mecca",
+      "UIS": "Università delle Scienze Islamiche, Karachi",
+      "IG": "Istituto di Geofisica dell'Università di Teheran",
+      "SIA": "Istituto Imamia Ithna-Ashari, Qom",
+      "Gulf": "Regione del Golfo",
+      "Kuwait": "Kuwait",
+      "Quatar": "Qatar",
+      "MUIS": "Consiglio Islamico di Singapore, Singapore",
+      "UOIF": "Unione delle Organizzazioni Islamiche Francesi",
+      "DIB": "Direzione degli Affari Religiosi, Turchia",
+      "SAMR": "Direzione dei Musulmani della Russia"
+    },
+    "adj": {
+      "title": "Impostazione manuale dell'ora"
+    },
+    "prayer": {
+      "Imsak": "Imsak",
+      "Sunrise": "Alba",
+      "Midnight": "Mezzanotte",
+      "Fajr": "Alba",
+      "Dhuhr": "Mezzogiorno",
+      "Asr": "Pomeriggio",
+      "Maghrib": "Tramonto",
+      "Isha": "Notte"
+    },
+    "angles": {
+      "title": "Angoli personalizzati",
+      "fajr": "Angolo di Alba (°)",
+      "isha": "Angolo di Notte (°)"
+    },
+    "add": {
+      "title": "Mostra tempi aggiuntivi"
+    },
+    "midnight": {
+      "title": "Regime di mezzanotte",
+      "SuToSu": "Dall'alba al sorgere del sole",
+      "SuToFa": "Dall'alba all'alba"
+    },
+    "theme": {
+      "title": "Tema",
+      "system": "Sistema",
+      "dark": "Scuro",
+      "light": "Chiaro"
+    },
+    "language": "Lingua",
+    "btn": {
+      "apply": "Applica",
+      "quit": "Esci"
+    },
+    "footer": {
+      "version": "Versione dei tempi di preghiera",
+      "credits": "Crediti"
+    },
+    "notification": {
+      "title": "È arrivato il momento di {{prayer}}",
+      "body": [
+        "[29:45] (O Muhammad), recita ciò che ti è stato rivelato dal libro e osserva la preghiera, perché la preghiera tiene lontano dalla dissolutezza e dall'azione riprovevole; inoltre, ricordare Allah è la cosa più grande.",
+        "Allah sa ciò che fate."
+      ]
+    },
+    "apiError": {
+      "title": "Oops! Qualcosa è andato storto!",
+      "message": "Potrebbe esserci un errore con l'API {{api}}.\n${{err}}"
+    },
+    "noInternet": {
+      "title": "Connessione Internet assente",
+      "message": "Controlla la tua connessione Internet e riprova."
+    },
+    "cityError": {
+      "title": "Errore nella città e nello stato: {{input}}",
+      "message": "Riordina le informazioni sulla città e sullo stato separandoli con una virgola."
+    }
+  }
+  
