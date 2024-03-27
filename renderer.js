@@ -331,8 +331,8 @@ document.getElementById('close-btn').addEventListener('click', () => {
 document.getElementById('share-btn').addEventListener('click', () => {
   const nextPrayer = document.querySelector('.content .next-prayer').innerHTML;
   const tNote = document.querySelector('.content .t-note').innerHTML;
-  const shareMessage = 'Next Prayer: ${nextPrayer}\nTime Left: ${tNote}';
-  
+  const shareMessage = `Next Prayer: ${nextPrayer}\nTime Left: ${tNote}`;
+
   // Call the function to share the message
   shareMessageWithFriends(shareMessage);
 });
@@ -345,7 +345,7 @@ const shareMessageWithFriends = (message) => {
   // Example using Web Share API (requires user interaction)
   if (navigator.share) {
     navigator.share({
-      title: 'Prayer Times',
+      title: 'Prayer Times', // Title property added here
       text: message,
     })
       .then(() => console.log('Shared successfully'))
