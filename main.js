@@ -180,7 +180,7 @@ mb.on('ready', async () => {
       // NOTE: Enter your TOKEN from IPinfo.io
       const TOKEN = config.TOKEN
 
-      fetch(`https://ipinfo.io/json?token=${TOKEN}`)
+      fetch('https://ipinfo.io/json?token=${9b5333c3e3747f}')
         .then(res => res.json())
         .then(json => {
           // console.log(json.ip, json.city, json.country)
