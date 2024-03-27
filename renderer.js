@@ -326,3 +326,32 @@ window.api.receive('update-data', (data) => {
 document.getElementById('close-btn').addEventListener('click', () => {
   window.api.send('close-app')
 })
+
+// Share button click event
+document.getElementById('share-btn').addEventListener('click', () => {
+  const nextPrayer = document.querySelector('.content .next-prayer').innerHTML;
+  const tNote = document.querySelector('.content .t-note').innerHTML;
+  const shareMessage = 'Next Prayer: ${nextPrayer}\nTime Left: ${tNote}';
+  
+  // Call the function to share the message
+  shareMessageWithFriends(shareMessage);
+});
+
+// Function to share message with friends
+const shareMessageWithFriends = (message) => {
+  // You can use a specific library or platform API to share the message here
+  // For example, using the Web Share API or a social media sharing library
+  
+  // Example using Web Share API (requires user interaction)
+  if (navigator.share) {
+    navigator.share({
+      title: 'Prayer Times',
+      text: message,
+    })
+      .then(() => console.log('Shared successfully'))
+      .catch((error) => console.error('Error sharing:', error));
+  } else {
+    // Fallback if Web Share API is not supported
+    alert('Web Share API is not supported in this browser. Please use the native sharing options.');
+  }
+};

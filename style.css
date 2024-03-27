@@ -482,3 +482,18 @@ button:hover {
   gap: 8px;
   justify-content: center;
 }
+
+
+/* styles for the share button/icon */
+.share-btn {
+  cursor: pointer;
+  margin: 5px;
+}
+
+.share-btn img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
