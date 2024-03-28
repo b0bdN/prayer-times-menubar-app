@@ -329,13 +329,13 @@ document.getElementById('close-btn').addEventListener('click', () => {
 
 // Share button click event
 document.getElementById('share-btn').addEventListener('click', () => {
-  const nextPrayer = document.querySelector('.content .next-prayer').innerHTML;
-  const tNote = document.querySelector('.content .t-note').innerHTML;
-  const shareMessage = `Next Prayer: ${nextPrayer}\nTime Left: ${tNote}`;
+  const nextPrayer = document.querySelector('.content .next-prayer').innerHTML
+  const tNote = document.querySelector('.content .t-note').innerHTML
+  const shareMessage = `Next Prayer: ${nextPrayer}\nTime Left: ${tNote}`
 
   // Call the function to share the message
-  shareMessageWithFriends(shareMessage);
-});
+  shareMessageWithFriends(shareMessage)
+})
 
 // Function to share message with friends
 const shareMessageWithFriends = (message) => {

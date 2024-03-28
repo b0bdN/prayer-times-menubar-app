@@ -1,87 +1,86 @@
 {
-    "geo": {
-      "city": "Ilu",
-      "ISO": "Wa Iwakọ Koodu Orilẹ-ede"
-    },
-    "calc": {
-      "title": "Iwakọ Isanra",
-      "auto": "Wa Iwakọ Koodu Orilẹ-ede",
-      "custom": "Iwakọ Isanra ti awọn Ede",
-      "MWL": "Ligi Ile Yoruba Muslim",
-      "ISNA": "Ilu keji ti awọn Mosalẹ Ilẹ-ede Amẹrika",
-      "EGAS": "Awọn Ṣojuwo Amu of Egypt",
-      "UAQU": "Olootu Ile al-Makkah Qura",
-      "UIS": "Olootu Science of Islam, Karachi",
-      "IG": "Ilu Awọn Science Awọn awọn Geophysics, Ilu Tehran",
-      "SIA": "Shia Ithna-Ashari, Leva Institute, Qum",
-      "Gulf": "Agba iṣẹdu Ile iṣẹdin",
-      "Kuwait": "Kuwait",
-      "Quatar": "Quatar",
-      "MUIS": "Ilu Ra Catholic Ile Singapore, Singapore",
-      "UOIF": "Association of Ise Islam iṣẹdin France",
-      "DIB": "Awọn Iṣowo olu Ojumo Agbaiye, Turkey",
-      "SAMR": "Awọn Agbanisi Muslim ti Ile-ede Russia"
-    },
-    "adj": {
-      "title": "Iwakọ Ise Agbaye"
-    },
-    "prayer": {
-      "Imsak": "Imsak",
-      "Sunrise": "Sunrise",
-      "Midnight": "Odun",
-      "Fajr": "Fajr",
-      "Dhuhr": "Dhuhr",
-      "Asr": "Asr",
-      "Maghrib": "Maghrib",
-      "Isha": "Isha"
-    },
-    "angles": {
-      "title": "Iwakọ Isanra ti awọn Ede",
-      "fajr": "Fajr angle (°)",
-      "isha": "Isha angle (°)"
-    },
-    "add": {
-      "title": "Ran iriri iwakọ ti o dara ju"
-    },
-    "midnight": {
-      "title": "Odun ti o dara ju",
-      "SuToSu": "Odun ti o dara ju Iṣẹ dinu Oṣupa",
-      "SuToFa": "Odun ti o dara ju Iṣẹ dinu Oṣupa"
-    },
-    "theme": {
-      "title": "Akojọ",
-      "system": "System",
-      "dark": "Dundu",
-      "light": "Ọla"
-    },
-    "language": "Eda",
-    "btn": {
-      "apply": "Fẹrẹ",
-      "quit": "Yi"
-    },
-    "footer": {
-      "version": "awọn ọjọ iwakọ",
-      "credits": "Imulo"
-    },
-    "notification": {
-      "title": "Ẹ ṣe lẹhin wa ni o wa waakọ {{prayer}}",
-      "body": [
-        "[29:45] Rara, [O Muḥammad], kini ti wa ti ṣubulọ si o lati Ofin ati waakọ."
-        "Tori wipe, iwakọ ti o dara ju iwakọ kuro ni imọran ati iwọn, ati ki Olodumare ni agbara ti."
-        "Ati Olorun ma n ṣe nigba ti o ṣe."
-      ]
-    },
-    "apiError": {
-      "title": "E ba mi pele! Nibẹkẹ ti o sọmọbi!",
-      "message": "O le jẹ ki o ba n ṣe ayipada pẹlu API {{api}}.\n${{err}}"
-    },
-    "noInternet": {
-      "title": "Ko si iṣẹrẹ alaba",
-      "message": "Ṣawari tabi akọkọ iṣẹrẹ wa ati ṣe afani rẹ."
-    },
-    "cityError": {
-      "title": "Ilu ati Orilẹ-ede ti ko le kori: {{input}}",
-      "message": "Jọwọ mu ilu ati orilẹ-ede ni ori inu ita kan meji."
-    }
+  "geo": {
+    "city": "Ilu",
+    "ISO": "Wa Iwakọ Koodu Orilẹ-ede"
+  },
+  "calc": {
+    "title": "Iwakọ Isanra",
+    "auto": "Wa Iwakọ Koodu Orilẹ-ede",
+    "custom": "Iwakọ Isanra ti awọn Ede",
+    "MWL": "Ligi Ile Yoruba Muslim",
+    "ISNA": "Ilu keji ti awọn Mosalẹ Ilẹ-ede Amẹrika",
+    "EGAS": "Awọn Ṣojuwo Amu of Egypt",
+    "UAQU": "Olootu Ile al-Makkah Qura",
+    "UIS": "Olootu Science of Islam, Karachi",
+    "IG": "Ilu Awọn Science Awọn awọn Geophysics, Ilu Tehran",
+    "SIA": "Shia Ithna-Ashari, Leva Institute, Qum",
+    "Gulf": "Agba iṣẹdu Ile iṣẹdin",
+    "Kuwait": "Kuwait",
+    "Quatar": "Quatar",
+    "MUIS": "Ilu Ra Catholic Ile Singapore, Singapore",
+    "UOIF": "Association of Ise Islam iṣẹdin France",
+    "DIB": "Awọn Iṣowo olu Ojumo Agbaiye, Turkey",
+    "SAMR": "Awọn Agbanisi Muslim ti Ile-ede Russia"
+  },
+  "adj": {
+    "title": "Iwakọ Ise Agbaye"
+  },
+  "prayer": {
+    "Imsak": "Imsak",
+    "Sunrise": "Sunrise",
+    "Midnight": "Odun",
+    "Fajr": "Fajr",
+    "Dhuhr": "Dhuhr",
+    "Asr": "Asr",
+    "Maghrib": "Maghrib",
+    "Isha": "Isha"
+  },
+  "angles": {
+    "title": "Iwakọ Isanra ti awọn Ede",
+    "fajr": "Fajr angle (°)",
+    "isha": "Isha angle (°)"
+  },
+  "add": {
+    "title": "Ran iriri iwakọ ti o dara ju"
+  },
+  "midnight": {
+    "title": "Odun ti o dara ju",
+    "SuToSu": "Odun ti o dara ju Iṣẹ dinu Oṣupa",
+    "SuToFa": "Odun ti o dara ju Iṣẹ dinu Oṣupa"
+},
+  "theme": {
+    "title": "Akojọ",
+    "system": "System",
+    "dark": "Dundu",
+    "light": "Ọla"
+  },
+  "language": "Eda",
+  "btn": {
+    "apply": "Fẹrẹ",
+    "quit": "Yi"
+  },
+  "footer": {
+    "version": "awọn ọjọ iwakọ",
+    "credits": "Imulo"
+  },
+  "notification": {
+    "title": "Ẹ ṣe lẹhin wa ni o wa waakọ {{prayer}}",
+    "body": [
+      "[29:45] Rara, [O Muḥammad], kini ti wa ti ṣubulọ si o lati Ofin ati waakọ.",
+      "Tori wipe, iwakọ ti o dara ju iwakọ kuro ni imọran ati iwọn, ati ki Olodumare ni agbara ti.",
+      "Ati Olorun ma n ṣe nigba ti o ṣe."
+    ]
+  },
+  "apiError": {
+    "title": "E ba mi pele! Nibẹkẹ ti o sọmọbi!",
+    "message": "O le jẹ ki o ba n ṣe ayipada pẹlu API {{api}}.\n${{err}}"
+  },
+  "noInternet": {
+    "title": "Ko si iṣẹrẹ alaba",
+    "message": "Ṣawari tabi akọkọ iṣẹrẹ wa ati ṣe afani rẹ."
+  },
+  "cityError": {
+    "title": "Ilu ati Orilẹ-ede ti ko le kori: {{input}}",
+    "message": "Jọwọ mu ilu ati orilẹ-ede ni ori inu ita kan meji."
   }
-  
+}
