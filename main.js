@@ -155,6 +155,26 @@ mb.on('ready', async () => {
     new Notification({ title: NOTIFICATION_TITLE, body: NOTIFICATION_BODY }).show()
   })
 
+  // Add listener for receiving custom reminder data from renderer process
+  ipcMain.on('setCustomReminder', (event, data) => {
+    const { time, prayer } = data
+    // Set your logic to handle custom reminders, such as scheduling notifications or alarms
+    // Schedule a notification for the specified time
+    scheduleNotification(time, prayer)
+  })
+
+  // Function to schedule a notification
+  const scheduleNotification = (time, prayer) => {
+  // Set your logic here to schedule a notification or alarm for the specified time and prayer
+  // Example: Use Electron's Notification API to show a notification
+  const notification = new Notification({
+    title: 'Custom Reminder'
+    body: `It's time for ${prayer} prayer!`
+  })
+
+  notification.show()
+}
+
   // Theme.
   function setNativeTheme (theme) {
     if (theme === 'system') {
@@ -211,7 +231,7 @@ mb.on('ready', async () => {
   // TODO: add more parameters after adding them in the settings pannel (e.g. school, hijri adjustment, latitudeAdjustmentMethod  ...).
   async function getTimings (city, country, method, tunes, midnightMode) {
     console.log('Fecth timings with Aladhan API.')
-    let url = `https://api.aladhan.com/v1/calendarByCity?annual=true&city=${city}&country=${country}&midnightMode=${midnightMode}`
+    let url = ` ?annual=true&city=${city}&country=${country}&midnightMode=${midnightMode}`
 
     if (method !== 'auto') url += `&method=${method}`
 
