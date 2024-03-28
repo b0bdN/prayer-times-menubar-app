@@ -341,7 +341,6 @@ document.getElementById('share-btn').addEventListener('click', () => {
 const shareMessageWithFriends = (message) => {
   // You can use a specific library or platform API to share the message here
   // For example, using the Web Share API or a social media sharing library
-  
   // Example using Web Share API (requires user interaction)
   if (navigator.share) {
     navigator.share({
@@ -349,9 +348,27 @@ const shareMessageWithFriends = (message) => {
       text: message,
     })
       .then(() => console.log('Shared successfully'))
-      .catch((error) => console.error('Error sharing:', error));
+      .catch((error) => console.error('Error sharing:', error))
   } else {
     // Fallback if Web Share API is not supported
-    alert('Web Share API is not supported in this browser. Please use the native sharing options.');
+    alert('Web Share API is not supported in this browser. Please use the native sharing options.')
   }
-};
+}
+
+// Add event listener for setting custom reminders
+document.getElementById('setCustomReminder').addEventListener('click', () => {
+  const reminderTime = document.getElementById('customReminderTime').value
+  const reminderPrayer = document.getElementById('customReminderPrayer').value
+
+  if (reminderTime && reminderPrayer) {
+    setCustomReminder(reminderTime, reminderPrayer)
+  } else {
+    alert('Please enter both time and prayer for the reminder.')
+  }
+})
+
+// Function to set custom reminders
+const setCustomReminder = (time, prayer) => {
+  // Send custom reminder data to main process
+  window.api.send('setCustomReminder', { time, prayer })
+}
